@@ -1,37 +1,30 @@
-<!DOCTYPE html><html lang="th"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>ระบบบริการตรวจสอบและจัดการพื้นที่งดจ่ายกระแสไฟฟ้า - การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</title>        <!-- Open Graph Meta Tags for LINE / Facebook Share -->    <meta property="og:title" content="ระบบตรวจสอบพื้นที่งดจ่ายกระแสไฟฟ้านครนายก อัจฉริยะ">    <meta property="og:description" content="บริการตรวจสอบจุดปรับปรุงระบบจำหน่ายไฟฟ้า แผนผังเส้นทางพิกัดไฟดับแบบเรียลไทม์">    <meta property="og:type" content="website">
-    <!-- Tailwind CSS -->    <script src="https://cdn.tailwindcss.com"></script>    <!-- Google Fonts: Sarabun & Kanit -->    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&amp;family=Sarabun:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">    <!-- FontAwesome for Icons -->    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">        <!-- Screenshot & PDF Engines -->    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!DOCTYPE html><html lang="th"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>ระบบบริการตรวจสอบและจัดการพื้นที่งดจ่ายกระแสไฟฟ้า - การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</title>        <meta property="og:title" content="ระบบตรวจสอบพื้นที่งดจ่ายกระแสไฟฟ้านครนายก อัจฉริยะ">    <meta property="og:description" content="บริการตรวจสอบจุดปรับปรุงระบบจำหน่ายไฟฟ้า แผนผังเส้นทางพิกัดไฟดับแบบเรียลไทม์">    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&amp;family=Sarabun:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>        body { font-family: 'Sarabun', sans-serif; }        h1, h2, h3, h4, h5, h6, .font-kanit { font-family: 'Kanit', sans-serif; }        @media print {            body * { visibility: hidden; }            #poster-to-print, #poster-to-print * { visibility: visible; }            #poster-to-print { position: absolute; left: 0; top: 0; width: 100%; border: none !important; box-shadow: none !important; }            .no-print { display: none !important; }        }        /* Active button style */        .tab-active {            background-color: white;            color: #3b0764;            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);        }    </style></head><body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
-    <!-- Header (Web Only) -->    <header class="bg-gradient-to-r from-purple-950 via-indigo-900 to-purple-950 text-white shadow-md no-print shrink-0">        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">            <div class="flex items-center gap-3">                <div class="bg-yellow-400 text-purple-950 w-11 h-11 rounded-full flex items-center justify-center font-extrabold shadow-md animate-pulse">                    <i class="fa-solid fa-bolt text-xl"></i>                </div>                <div>                    <span class="bg-purple-800 text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider font-kanit font-bold">PEA การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</span>                    <h1 class="text-lg md:text-xl font-bold mt-0.5 tracking-tight">ระบบบริการตรวจสอบพื้นที่งดจ่ายกระแสไฟฟ้า</h1>                </div>            </div>                        <!-- Quick Actions & Admin Toggle -->            <div class="flex items-center gap-2">                <div class="inline-flex bg-purple-900/60 p-1.5 rounded-xl border border-purple-800">                    <select id="eventDateSelector" onchange="onSelectEventChange(this.value)" class="bg-transparent text-yellow-300 font-bold font-kanit text-xs focus:outline-none px-2 py-1 pr-4 cursor-pointer"></select>                </div>                <button onclick="openAdminPasswordModal()" class="bg-amber-500 hover:bg-amber-600 text-purple-950 font-kanit font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow flex items-center gap-1.5">                    <i class="fa-solid fa-user-gear text-sm"></i> 🛠️ จัดการระบบ (หลังบ้าน)                </button>            </div>        </div>    </header>
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">                <!-- Interactive Calendar Board (Web Only) -->        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200/80 mb-6 no-print grid grid-cols-1 md:grid-cols-12 gap-6">            <div class="md:col-span-4 flex flex-col justify-between">                <div>                    <h3 class="font-kanit font-extrabold text-slate-800 text-base flex items-center gap-2">                        <i class="fa-regular fa-calendar-check text-purple-800"></i> ปฏิทินปฏิบัติงานหยุดจ่ายไฟ                    </h3>                    <p class="text-xs text-slate-400 mt-1.5 leading-relaxed font-medium">คลิกที่ปุ่ม <strong class="text-red-500">"วันสีแดง"</strong> ในปฏิทิน เพื่อตรวจสอบแผนผังแบบจำลองและรายชื่อร้านค้าที่ไฟดับในวันนั้น ๆ ได้ทันทีครับ</p>                </div>                <div class="space-y-2 mt-4 text-[11px] font-bold font-kanit">                    <div class="flex items-center gap-2 p-2 rounded-xl bg-purple-50 border border-purple-100/50">                        <span class="w-3.5 h-3.5 rounded-lg bg-purple-950 inline-block"></span>                        <span class="text-purple-950">วันที่คุณกำลังเลือกดูข้อมูลอยู่</span>                    </div>                    <div class="flex items-center gap-2 p-2 rounded-xl bg-red-50 border border-red-100/50">                        <span class="w-3.5 h-3.5 rounded-lg bg-red-500 inline-block"></span>                        <span class="text-red-600">วันที่มีประกาศงดจ่ายกระแสไฟ</span>                    </div>                </div>            </div>                        <div class="md:col-span-8 bg-slate-50 p-4 rounded-2xl border border-slate-200/60">                <!-- Month Navigator -->                <div class="flex justify-between items-center mb-4 px-2">                    <button onclick="changeCalMonth(-1)" class="p-2 rounded-lg hover:bg-slate-200/60 text-slate-600 transition-colors">                        <i class="fa-solid fa-chevron-left"></i>                    </button>                    <span id="calMonthYearHeader" class="font-kanit font-extrabold text-slate-800 text-sm md:text-base">มิถุนายน 2569</span>                    <button onclick="changeCalMonth(1)" class="p-2 rounded-lg hover:bg-slate-200/60 text-slate-600 transition-colors">                        <i class="fa-solid fa-chevron-right"></i>                    </button>                </div>                                <!-- Day Names Header -->                <div class="grid grid-cols-7 gap-1 text-center text-[10px] md:text-xs font-bold font-kanit text-slate-400 mb-2">                    <div class="text-red-500">อา.</div>                    <div>จ.</div>                    <div>อ.</div>                    <div>พ.</div>                    <div>พฤ.</div>                    <div>ศ.</div>                    <div class="text-blue-500">ส.</div>                </div>                                <!-- Days grid container -->                <div id="calDaysContainer" class="grid grid-cols-7 gap-1"></div>            </div>        </div>
-        <!-- Tab Select & Action Menu (Web Only) -->        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 no-print">            <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300/60 shadow-sm self-start">                <button onclick="switchTab('interactive')" id="btn-tab-interactive" class="tab-btn px-4 py-2.5 rounded-lg font-kanit font-medium text-sm transition-all duration-200 bg-white text-purple-950 shadow">                    <i class="fa-solid fa-magnifying-glass mr-2 text-purple-700"></i>ค้นหาพื้นที่ดับไฟด่วน                </button>                <button onclick="switchTab('poster')" id="btn-tab-poster" class="tab-btn px-4 py-2.5 rounded-lg font-kanit font-semibold text-sm transition-all duration-200 text-purple-900 bg-transparent hover:bg-white/40">                    <i class="fa-solid fa-file-image mr-2 text-red-500 animate-bounce"></i>โหมดใบประกาศอย่างเป็นทางการ (พร้อมแผนที่)                </button>            </div>
+    <header class="bg-gradient-to-r from-purple-950 via-indigo-900 to-purple-950 text-white shadow-md no-print shrink-0">        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">            <div class="flex items-center gap-3">                <div class="bg-yellow-400 text-purple-950 w-11 h-11 rounded-full flex items-center justify-center font-extrabold shadow-md animate-pulse">                    <i class="fa-solid fa-bolt text-xl"></i>                </div>                <div>                    <span class="bg-purple-800 text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider font-kanit font-bold">PEA การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</span>                    <h1 class="text-lg md:text-xl font-bold mt-0.5 tracking-tight">ระบบบริการตรวจสอบพื้นที่งดจ่ายกระแสไฟฟ้า</h1>                </div>            </div>                        <div class="flex items-center gap-2">                <div class="inline-flex bg-purple-900/60 p-1.5 rounded-xl border border-purple-800">                    <select id="eventDateSelector" onchange="onSelectEventChange(this.value)" class="bg-transparent text-yellow-300 font-bold font-kanit text-xs focus:outline-none px-2 py-1 pr-4 cursor-pointer"></select>                </div>                <button onclick="openAdminPasswordModal()" class="bg-amber-500 hover:bg-amber-600 text-purple-950 font-kanit font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow flex items-center gap-1.5">                    <i class="fa-solid fa-user-gear text-sm"></i> 🛠️ จัดการระบบ (หลังบ้าน)                </button>            </div>        </div>    </header>
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200/80 mb-6 no-print grid grid-cols-1 md:grid-cols-12 gap-6">            <div class="md:col-span-4 flex flex-col justify-between">                <div>                    <h3 class="font-kanit font-extrabold text-slate-800 text-base flex items-center gap-2">                        <i class="fa-regular fa-calendar-check text-purple-800"></i> ปฏิทินปฏิบัติงานหยุดจ่ายไฟ                    </h3>                    <p class="text-xs text-slate-400 mt-1.5 leading-relaxed font-medium">คลิกที่ปุ่ม <strong class="text-red-500">"วันสีแดง"</strong> ในปฏิทิน เพื่อตรวจสอบแผนผังแบบจำลองและรายชื่อร้านค้าที่ไฟดับในวันนั้น ๆ ได้ทันทีครับ</p>                </div>                <div class="space-y-2 mt-4 text-[11px] font-bold font-kanit">                    <div class="flex items-center gap-2 p-2 rounded-xl bg-purple-50 border border-purple-100/50">                        <span class="w-3.5 h-3.5 rounded-lg bg-purple-950 inline-block"></span>                        <span class="text-purple-950">วันที่คุณกำลังเลือกดูข้อมูลอยู่</span>                    </div>                    <div class="flex items-center gap-2 p-2 rounded-xl bg-red-50 border border-red-100/50">                        <span class="w-3.5 h-3.5 rounded-lg bg-red-500 inline-block"></span>                        <span class="text-red-600">วันที่มีประกาศงดจ่ายกระแสไฟ</span>                    </div>                </div>            </div>                        <div class="md:col-span-8 bg-slate-50 p-4 rounded-2xl border border-slate-200/60">                <div class="flex justify-between items-center mb-4 px-2">                    <button onclick="changeCalMonth(-1)" class="p-2 rounded-lg hover:bg-slate-200/60 text-slate-600 transition-colors">                        <i class="fa-solid fa-chevron-left"></i>                    </button>                    <span id="calMonthYearHeader" class="font-kanit font-extrabold text-slate-800 text-sm md:text-base">มิถุนายน 2569</span>                    <button onclick="changeCalMonth(1)" class="p-2 rounded-lg hover:bg-slate-200/60 text-slate-600 transition-colors">                        <i class="fa-solid fa-chevron-right"></i>                    </button>                </div>                                <div class="grid grid-cols-7 gap-1 text-center text-[10px] md:text-xs font-bold font-kanit text-slate-400 mb-2">                    <div class="text-red-500">อา.</div>                    <div>จ.</div>                    <div>อ.</div>                    <div>พ.</div>                    <div>พฤ.</div>                    <div>ศ.</div>                    <div class="text-blue-500">ส.</div>                </div>                                <div id="calDaysContainer" class="grid grid-cols-7 gap-1"></div>            </div>        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 no-print">            <div class="flex bg-slate-200 p-1.5 rounded-xl border border-slate-300/60 shadow-sm self-start">                <button onclick="switchTab('interactive')" id="btn-tab-interactive" class="tab-btn px-4 py-2.5 rounded-lg font-kanit font-medium text-sm transition-all duration-200 bg-white text-purple-950 shadow">                    <i class="fa-solid fa-magnifying-glass mr-2 text-purple-700"></i>ค้นหาพื้นที่ดับไฟด่วน                </button>                <button onclick="switchTab('poster')" id="btn-tab-poster" class="tab-btn px-4 py-2.5 rounded-lg font-kanit font-semibold text-sm transition-all duration-200 text-purple-900 bg-transparent hover:bg-white/40">                    <i class="fa-solid fa-file-image mr-2 text-red-500 animate-bounce"></i>โหมดใบประกาศอย่างเป็นทางการ (พร้อมแผนที่)                </button>            </div>
             <div class="flex flex-wrap gap-2">                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-kanit font-semibold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm">                    <i class="fa-solid fa-print"></i> พิมพ์หน้าต่างนี้                </button>                <button onclick="downloadAsPDF()" class="bg-purple-900 hover:bg-purple-950 text-white font-kanit font-semibold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm">                    <i class="fa-solid fa-file-pdf text-red-400"></i> เซฟไฟล์ PDF ด่วน                </button>                <button onclick="generateImage()" class="bg-amber-500 hover:bg-amber-600 text-purple-950 font-kanit font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm">                    <i class="fa-solid fa-image"></i> เซฟเป็นรูปภาพ (มือถือแชร์ LINE)                </button>            </div>        </div>
-        <!-- Tab 1: Interactive Search Dashboard -->        <div id="tab-interactive" class="space-y-6 no-print">            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm flex gap-3 items-start">                <div class="text-amber-500 text-xl mt-0.5"><i class="fa-solid fa-circle-info"></i></div>                <div>                    <h4 class="font-kanit font-semibold text-amber-900 text-base">คำชี้แจงจากสำนักงานการไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</h4>                    <p id="infoReasonText" class="text-sm text-amber-800 leading-relaxed mt-0.5 font-medium"></p>                </div>            </div>
-            <!-- Search Area -->            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">                <h3 class="font-kanit font-semibold text-lg text-slate-800 mb-1 flex items-center gap-2">                    <i class="fa-solid fa-search-location text-purple-900"></i> ค้นหาพิกัดหรือชื่อร้านค้าที่ได้รับผลกระทบ                </h3>                <p id="searchSubText" class="text-xs text-slate-400 mb-4 font-medium">พิมพ์ชื่อสถานที่ เพื่อเช็กเวลาไฟดับของวันที่เลือก</p>                <div class="relative max-w-xl">                    <input type="text" id="searchInput" oninput="searchLocation()" placeholder="พิมพ์ชื่อร้านค้า/สถานที่ที่ต้องการค้นหา..." class="w-full px-4 py-3 pl-11 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-600 focus:bg-white transition-all text-slate-800 placeholder-slate-400 font-kanit">                    <div class="absolute left-4 top-3.5 text-slate-400"><i class="fa-solid fa-search"></i></div>                </div>                <div id="searchResults" class="hidden mt-4 p-4 rounded-xl border transition-all"></div>            </div>
-            <!-- Affected Locations List Accordion -->            <div class="space-y-3">                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">                    <button onclick="toggleAccordion('acc-outage')" class="w-full px-5 py-4 flex justify-between items-center bg-purple-50/40 hover:bg-purple-50 transition-colors text-left">                        <span id="accordionTitleText" class="font-kanit font-semibold text-purple-950 text-sm md:text-base">📍 รายละเอียดพิกัดงดจ่ายไฟฟ้าทั้งหมด</span>                        <i id="acc-outage-icon" class="fa-solid fa-chevron-up text-purple-800 transition-transform" style="transform: rotate(180deg);"></i>                    </button>                    <div id="acc-outage-content" class="p-5 border-t border-slate-200 bg-white grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-slate-600 hidden"></div>                </div>            </div>        </div>
-        <!-- Tab 2: High Contrast PEA Official Design Poster -->        <div id="tab-poster" class="block">            <div id="poster-to-print" class="bg-gradient-to-b from-purple-900 to-indigo-950 p-[8px] rounded-[32px] max-w-2xl mx-auto shadow-2xl relative overflow-hidden border-4 border-purple-950">                <div class="bg-white rounded-[26px] p-6 flex flex-col justify-between relative overflow-hidden">                                        <!-- Poster Header -->                    <div class="bg-purple-900 -mx-6 -mt-6 p-5 rounded-t-[24px] rounded-b-[36px] text-white flex flex-col items-center relative overflow-hidden">                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-purple-800/40 rounded-full"></div>                        <div class="absolute -left-8 -bottom-8 w-32 h-32 bg-indigo-950/50 rounded-full"></div>                                                <div class="flex items-center justify-between w-full px-2">                            <div class="flex items-center gap-2">                                <div class="bg-white text-purple-900 p-1.5 rounded-full w-9 h-9 flex items-center justify-center font-black text-lg border-2 border-yellow-400">                                    <i class="fa-solid fa-bolt text-purple-800"></i>                                </div>                                <div class="leading-none">                                    <p class="font-extrabold text-base tracking-tighter text-white font-kanit">PEA</p>                                    <p class="text-[7px] text-purple-200 font-bold">การไฟฟ้าส่วนภูมิภาค</p>                                </div>                            </div>                            <div class="bg-yellow-400 text-purple-950 font-kanit font-extrabold text-[10px] md:text-xs px-4 py-1 rounded-full uppercase tracking-wider shadow">                                จังหวัดนครนายก                            </div>                        </div>
+        <div id="tab-interactive" class="space-y-6 no-print">            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl shadow-sm flex gap-3 items-start">                <div class="text-amber-500 text-xl mt-0.5"><i class="fa-solid fa-circle-info"></i></div>                <div>                    <h4 class="font-kanit font-semibold text-amber-900 text-base">คำชี้แจงจากสำนักงานการไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</h4>                    <p id="infoReasonText" class="text-sm text-amber-800 leading-relaxed mt-0.5 font-medium"></p>                </div>            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">                <h3 class="font-kanit font-semibold text-lg text-slate-800 mb-1 flex items-center gap-2">                    <i class="fa-solid fa-search-location text-purple-900"></i> ค้นหาพิกัดหรือชื่อร้านค้าที่ได้รับผลกระทบ                </h3>                <p id="searchSubText" class="text-xs text-slate-400 mb-4 font-medium">พิมพ์ชื่อสถานที่ เพื่อเช็กเวลาไฟดับของวันที่เลือก</p>                <div class="relative max-w-xl">                    <input type="text" id="searchInput" oninput="searchLocation()" placeholder="พิมพ์ชื่อร้านค้า/สถานที่ที่ต้องการค้นหา..." class="w-full px-4 py-3 pl-11 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-600 focus:bg-white transition-all text-slate-800 placeholder-slate-400 font-kanit">                    <div class="absolute left-4 top-3.5 text-slate-400"><i class="fa-solid fa-search"></i></div>                </div>                <div id="searchResults" class="hidden mt-4 p-4 rounded-xl border transition-all"></div>            </div>
+            <div class="space-y-3">                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">                    <button onclick="toggleAccordion('acc-outage')" class="w-full px-5 py-4 flex justify-between items-center bg-purple-50/40 hover:bg-purple-50 transition-colors text-left">                        <span id="accordionTitleText" class="font-kanit font-semibold text-purple-950 text-sm md:text-base">📍 รายละเอียดพิกัดงดจ่ายไฟฟ้าทั้งหมด</span>                        <i id="acc-outage-icon" class="fa-solid fa-chevron-up text-purple-800 transition-transform" style="transform: rotate(180deg);"></i>                    </button>                    <div id="acc-outage-content" class="p-5 border-t border-slate-200 bg-white grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-slate-600 hidden"></div>                </div>            </div>        </div>
+        <div id="tab-poster" class="block">            <div id="poster-to-print" class="bg-gradient-to-b from-purple-900 to-indigo-950 p-[8px] rounded-[32px] max-w-2xl mx-auto shadow-2xl relative overflow-hidden border-4 border-purple-950">                <div class="bg-white rounded-[26px] p-6 flex flex-col justify-between relative overflow-hidden">                                        <div class="bg-purple-900 -mx-6 -mt-6 p-5 rounded-t-[24px] rounded-b-[36px] text-white flex flex-col items-center relative overflow-hidden">                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-purple-800/40 rounded-full"></div>                        <div class="absolute -left-8 -bottom-8 w-32 h-32 bg-indigo-950/50 rounded-full"></div>                                                <div class="flex items-center justify-between w-full px-2">                            <div class="flex items-center gap-2">                                <div class="bg-white text-purple-900 p-1.5 rounded-full w-9 h-9 flex items-center justify-center font-black text-lg border-2 border-yellow-400">                                    <i class="fa-solid fa-bolt text-purple-800"></i>                                </div>                                <div class="leading-none">                                    <p class="font-extrabold text-base tracking-tighter text-white font-kanit">PEA</p>                                    <p class="text-[7px] text-purple-200 font-bold">การไฟฟ้าส่วนภูมิภาค</p>                                </div>                            </div>                            <div class="bg-yellow-400 text-purple-950 font-kanit font-extrabold text-[10px] md:text-xs px-4 py-1 rounded-full uppercase tracking-wider shadow">                                จังหวัดนครนายก                            </div>                        </div>
                         <div class="text-center mt-5 mb-2 relative z-10">                            <span class="text-purple-200 text-sm font-bold font-kanit block tracking-widest uppercase">ประกาศหยุดจ่ายกระแสไฟ</span>                            <h2 class="text-3xl md:text-4xl font-extrabold font-kanit text-yellow-300 tracking-wide drop-shadow-md flex items-center justify-center gap-2 mt-1">                                <i class="fa-solid fa-bullhorn text-red-500 text-2xl animate-bounce"></i>                                หยุดจ่ายกระแสไฟฟ้าชั่วคราว                            </h2>                            <p id="posterReasonText" class="text-white font-medium text-xs font-kanit tracking-wide mt-1"></p>                        </div>                    </div>
-                    <!-- Date & Time Grid -->                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">                                                <!-- Left Day Card -->                        <div class="bg-white border-[3px] border-red-500 rounded-3xl overflow-hidden shadow-md flex flex-col justify-between">                            <div class="bg-red-500 text-white text-center py-2 px-3 flex items-center justify-center gap-2">                                <i class="fa-solid fa-calendar-days text-sm"></i>                                <span class="font-kanit font-extrabold text-xs tracking-wider">วันดำเนินงานหยุดจ่ายไฟ</span>                            </div>                            <div class="p-4 flex flex-col items-center justify-center text-center flex-grow">                                <p id="posterDayOfWeekText" class="text-red-500 font-extrabold font-kanit text-base"></p>                                <p id="posterDayNumText" class="text-5xl font-black text-red-600 font-kanit my-1 tracking-tighter"></p>                                <p id="posterMonthYearText" class="text-base font-bold text-slate-800 font-kanit"></p>                            </div>                        </div>
-                        <!-- Right Time Card -->                        <div class="bg-white border-[3px] border-indigo-900 rounded-3xl overflow-hidden shadow-md flex flex-col justify-between">                            <div class="bg-indigo-900 text-white text-center py-2 px-3 flex items-center justify-center gap-2">                                <i class="fa-solid fa-clock text-sm"></i>                                <span class="font-kanit font-extrabold text-xs tracking-wider">ช่วงเวลางดจ่ายกระแสไฟ</span>                            </div>                            <div id="posterTimeContainer" class="p-3 text-center flex flex-col justify-center flex-grow text-xs min-h-[140px]"></div>                            <div class="bg-yellow-400 text-purple-950 text-center py-1.5 px-3 text-[10px] font-extrabold font-kanit border-t border-indigo-900 flex items-center justify-center gap-1">                                <i class="fa-solid fa-circle-exclamation text-xs"></i>                                <span>หากงานเสร็จก่อนเวลา จะจ่ายไฟคืนระบบทันที</span>                            </div>                        </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">                                                <div class="bg-white border-[3px] border-red-500 rounded-3xl overflow-hidden shadow-md flex flex-col justify-between">                            <div class="bg-red-500 text-white text-center py-2 px-3 flex items-center justify-center gap-2">                                <i class="fa-solid fa-calendar-days text-sm"></i>                                <span class="font-kanit font-extrabold text-xs tracking-wider">วันดำเนินงานหยุดจ่ายไฟ</span>                            </div>                            <div class="p-4 flex flex-col items-center justify-center text-center flex-grow">                                <p id="posterDayOfWeekText" class="text-red-500 font-extrabold font-kanit text-base"></p>                                <p id="posterDayNumText" class="text-5xl font-black text-red-600 font-kanit my-1 tracking-tighter"></p>                                <p id="posterMonthYearText" class="text-base font-bold text-slate-800 font-kanit"></p>                            </div>                        </div>
+                        <div class="bg-white border-[3px] border-indigo-900 rounded-3xl overflow-hidden shadow-md flex flex-col justify-between">                            <div class="bg-indigo-900 text-white text-center py-2 px-3 flex items-center justify-center gap-2">                                <i class="fa-solid fa-clock text-sm"></i>                                <span class="font-kanit font-extrabold text-xs tracking-wider">ช่วงเวลางดจ่ายกระแสไฟ</span>                            </div>                            <div id="posterTimeContainer" class="p-3 text-center flex flex-col justify-center flex-grow text-xs min-h-[140px]"></div>                            <div class="bg-yellow-400 text-purple-950 text-center py-1.5 px-3 text-[10px] font-extrabold font-kanit border-t border-indigo-900 flex items-center justify-center gap-1">                                <i class="fa-solid fa-circle-exclamation text-xs"></i>                                <span>หากงานเสร็จก่อนเวลา จะจ่ายไฟคืนระบบทันที</span>                            </div>                        </div>
                     </div>
-                    <!-- SVG Vector Map -->                    <div class="mt-5 border-2 border-slate-200 rounded-2xl p-3 bg-slate-50">                        <div class="flex items-center justify-between mb-2">                            <div class="flex items-center gap-1.5">                                <i class="fa-solid fa-map-location-dot text-purple-900 text-sm"></i>                                <span class="font-kanit font-bold text-xs text-slate-700">แผนผังจำลองโครงข่ายระบบจำหน่ายที่หยุดจ่ายไฟชั่วคราว</span>                            </div>                            <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono font-bold">VECTOR GRAPHIC MAP</span>                        </div>                                                <div id="svgMapWrapper" class="w-full"></div>
+                    <div class="mt-5 border-2 border-slate-200 rounded-2xl p-3 bg-slate-50">                        <div class="flex items-center justify-between mb-2">                            <div class="flex items-center gap-1.5">                                <i class="fa-solid fa-map-location-dot text-purple-900 text-sm"></i>                                <span class="font-kanit font-bold text-xs text-slate-700">แผนผังจำลองโครงข่ายระบบจำหน่ายที่หยุดจ่ายไฟชั่วคราว</span>                            </div>                            <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono font-bold">VECTOR GRAPHIC MAP</span>                        </div>                                                <div id="svgMapWrapper" class="w-full"></div>
                         <div id="mapLegendContainer" class="mt-2 bg-white p-2 rounded-lg border border-slate-200 text-[10px]"></div>                    </div>
-                    <!-- Warning Info Cards -->                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">                        <div class="bg-purple-950 text-white rounded-2xl p-3 flex items-center gap-3 border border-purple-900 shadow-sm">                            <div class="bg-purple-800 p-2 rounded-xl text-red-400 text-lg flex items-center justify-center animate-pulse shrink-0"><i class="fa-solid fa-heart-pulse"></i></div>                            <div class="leading-snug">                                <p class="text-[10px] font-extrabold text-amber-300 font-kanit">กรณีมีผู้ป่วยต้องใช้ไฟฟ้าการแพทย์</p>                                <p class="text-[9px] text-slate-200 mt-0.5 leading-relaxed font-medium">โปรดประสานงานเจ้าหน้าที่ กฟภ. นครนายก ล่วงหน้า เพื่อรับคำแนะนำการเตรียมระบบสำรองไฟฟ้าฉุกเฉิน</p>                            </div>                        </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">                        <div class="bg-purple-950 text-white rounded-2xl p-3 flex items-center gap-3 border border-purple-900 shadow-sm">                            <div class="bg-purple-800 p-2 rounded-xl text-red-400 text-lg flex items-center justify-center animate-pulse shrink-0"><i class="fa-solid fa-heart-pulse"></i></div>                            <div class="leading-snug">                                <p class="text-[10px] font-extrabold text-amber-300 font-kanit">กรณีมีผู้ป่วยต้องใช้ไฟฟ้าการแพทย์</p>                                <p class="text-[9px] text-slate-200 mt-0.5 leading-relaxed font-medium">โปรดประสานงานเจ้าหน้าที่ กฟภ. นครนายก ล่วงหน้า เพื่อรับคำแนะนำการเตรียมระบบสำรองไฟฟ้าฉุกเฉิน</p>                            </div>                        </div>
                         <div class="bg-yellow-400 text-purple-950 rounded-2xl p-3 flex items-center gap-3 border border-yellow-500 shadow-sm">                            <div class="bg-purple-950 text-yellow-400 p-2 rounded-xl text-lg flex items-center justify-center shrink-0"><i class="fa-solid fa-triangle-exclamation text-yellow-400"></i></div>                            <div class="leading-snug">                                <p class="text-[10px] font-extrabold font-kanit text-purple-950">ข้อควรระวังอันตราย</p>                                <p class="text-[9px] text-purple-900 font-semibold leading-relaxed font-bold">หลีกเลี่ยงการเชื่อมต่อเครื่องกำเนิดไฟฟ้าแบบขนานกับระบบของ กฟภ. โดยไม่มีระบบตัดตอนเด็ดขาด</p>                            </div>                        </div>                    </div>
                     <p class="text-center text-[10px] text-slate-400 font-semibold font-kanit mt-4 tracking-wide font-medium">ประกาศเพื่อทราบโดยทั่วกันและขออภัยในความไม่สะดวกเป็นอย่างสูง</p>
-                    <!-- Poster Footer -->                    <div class="bg-purple-900 -mx-6 -mb-6 mt-5 p-4 rounded-b-[24px] text-white flex flex-col sm:flex-row justify-between items-center gap-3 px-6 relative overflow-hidden">                        <div class="flex items-center gap-3 text-center sm:text-left z-10">                            <div class="text-white text-xl hidden sm:block"><i class="fa-solid fa-phone-volume"></i></div>                            <div>                                <p class="text-[9px] text-purple-200 leading-tight">โทรประสานงานแจ้งข้อขัดข้องระบบไฟฟ้า</p>                                <p class="text-xs font-bold font-kanit text-white">กฟภ. นครนายก: <span id="posterPhoneText" class="text-yellow-300">037-311297</span></p>                            </div>                        </div>                        <div class="flex items-center gap-2 bg-purple-950 px-3.5 py-1.5 rounded-xl border border-purple-800 shadow-inner z-10">                            <div class="text-left leading-none">                                <p class="text-[8px] text-slate-400">PEA Contact Center</p>                                <p class="text-base font-black font-kanit text-yellow-400">📞 1129</p>                            </div>                        </div>                    </div>
+                    <div class="bg-purple-900 -mx-6 -mb-6 mt-5 p-4 rounded-b-[24px] text-white flex flex-col sm:flex-row justify-between items-center gap-3 px-6 relative overflow-hidden">                        <div class="flex items-center gap-3 text-center sm:text-left z-10">                            <div class="text-white text-xl hidden sm:block"><i class="fa-solid fa-phone-volume"></i></div>                            <div>                                <p class="text-[9px] text-purple-200 leading-tight">โทรประสานงานแจ้งข้อขัดข้องระบบไฟฟ้า</p>                                <p class="text-xs font-bold font-kanit text-white">กฟภ. นครนายก: <span id="posterPhoneText" class="text-yellow-300">037-311297</span></p>                            </div>                        </div>                        <div class="flex items-center gap-2 bg-purple-950 px-3.5 py-1.5 rounded-xl border border-purple-800 shadow-inner z-10">                            <div class="text-left leading-none">                                <p class="text-[8px] text-slate-400">PEA Contact Center</p>                                <p class="text-base font-black font-kanit text-yellow-400">📞 1129</p>                            </div>                        </div>                    </div>
                 </div>            </div>        </div>    </main>
-    <!-- Modal for Image Export display -->    <div id="imageModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4">        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative flex flex-col max-h-[90vh]">            <button onclick="closeImageModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>            <h3 class="font-kanit font-extrabold text-base text-purple-950 mb-1"><i class="fa-solid fa-circle-check text-emerald-500"></i> แปลงเป็นรูปภาพสำเร็จแล้ว!</h3>            <p class="text-xs text-slate-500 mb-4">👉 มือถือ: <strong>กดค้างที่รูปภาพ</strong> แล้วเลือก "บันทึกรูปภาพ" เพื่อแชร์ใน LINE<br>👉 คอมพิวเตอร์: <strong>คลิกขวาที่ภาพ</strong> แล้วเลือก "บันทึกภาพเป็น..."</p>            <div id="modalImageContainer" class="overflow-y-auto flex-grow flex justify-center bg-slate-100 p-2 rounded-xl border border-slate-200 font-medium"></div>            <button onclick="closeImageModal()" class="mt-4 bg-slate-900 text-white font-kanit font-bold text-xs py-2.5 rounded-xl w-full">ปิดหน้าต่างนี้</button>        </div>    </div>
-    <!-- ============================================== -->    <!--  🔒 PASSWORD AUTHORIZATION MODAL (หน้าต่างใส่รหัส) -->    <!-- ============================================== -->    <div id="passwordModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">        <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center border-2 border-amber-500 shadow-2xl relative">            <button onclick="closePasswordModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">                <i class="fa-solid fa-lock"></i>            </div>            <h4 class="font-kanit font-extrabold text-base text-purple-950">รหัสผ่านผู้ดูแลระบบ</h4>            <p class="text-[11px] text-slate-500 mt-1 mb-4 leading-relaxed font-medium">กรุณากรอกรหัสผ่านเพื่อเข้าใช้งานแผงควบคุมหลังบ้าน</p>                        <input type="password" id="adminPasswordInput" placeholder="กรอกรหัสผ่าน" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:outline-none text-center font-kanit font-bold text-base mb-3">                        <button onclick="verifyAdminPassword()" class="w-full bg-purple-950 hover:bg-purple-900 text-white font-kanit font-bold text-xs py-3 rounded-xl transition-all shadow-md active:scale-95">                <i class="fa-solid fa-key text-yellow-400 mr-1.5"></i> ยืนยันรหัสผ่านเพื่อปลดล็อก            </button>        </div>    </div>
-    <!-- ================================================= -->    <!--  ADMIN CONTROL PANEL MODAL (ระบบจัดการหลังบ้าน)    -->    <!-- ================================================= -->    <div id="adminModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative flex flex-col max-h-[90vh] shadow-2xl border-4 border-amber-500">            <button onclick="closeAdminModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>                        <div class="flex items-center gap-2 border-b border-slate-200 pb-3 mb-4 shrink-0">                <div class="bg-amber-100 text-amber-800 w-10 h-10 rounded-full flex items-center justify-center text-lg">                    <i class="fa-solid fa-sliders"></i>                </div>                <div>                    <h3 class="font-kanit font-extrabold text-lg text-purple-950">แผงควบคุมระบบหลังบ้าน (Admin Panel)</h3>                    <p class="text-xs text-slate-500 font-medium">เพิ่ม ลบ หรือแก้ไขประกาศวันหยุดจ่ายกระแสไฟแบบไดนามิก</p>                </div>            </div>
-            <!-- Admin Tabs Navigation -->            <div class="flex border-b border-slate-200 mb-4 shrink-0 text-xs md:text-sm font-medium">                <button onclick="switchAdminTab('quick-import')" id="btn-admin-import" class="py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent">                    <i class="fa-solid fa-code text-purple-700 mr-1.5"></i>นำเข้าโค้ดจาก Gemini (JSON)                </button>                <button onclick="switchAdminTab('manage-dates')" id="btn-admin-manage" class="py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent">                    <i class="fa-solid fa-list-check text-slate-500 mr-1.5"></i>จัดการวันทำงาน                </button>                <button onclick="switchAdminTab('export-html')" id="btn-admin-export" class="py-2.5 px-4 font-kanit font-bold border-b-2 border-purple-950 text-purple-950">                    <i class="fa-solid fa-file-export text-emerald-600 mr-1.5"></i>บันทึกไฟล์เว็บใหม่ (.html)                </button>            </div>
-            <!-- Admin Tab Content Area -->            <div class="flex-grow overflow-y-auto pr-1 text-slate-700">                                <!-- Tab A: Gemini Code Import -->                <div id="admin-tab-quick-import" class="space-y-4 hidden">                    <div class="bg-purple-50 border-l-4 border-purple-700 p-3 rounded-r-lg text-xs leading-relaxed text-purple-950 font-medium">                        <p class="font-bold"><i class="fa-solid fa-lightbulb"></i> วิธีเพิ่มประกาศวันใหม่แบบเร็วที่สุด:</p>                        <ol class="list-decimal pl-4 mt-1 space-y-0.5">                            <li>ก๊อปปี้บล็อกโค้ดข้อมูลที่ส่งให้ใหม่ นำมาวางในช่องด้านล่างนี้</li>                            <li>กดปุ่ม **"📥 อัปเดตข้อมูลเข้าสู่ระบบ"**</li>                            <li>ดาวน์โหลดไฟล์เว็บสำเร็จรูปใหม่ (.html) แล้วนำไปเปลี่ยนบน GitHub เพื่อบันทึกถาวรครับ</li>                        </ol>                    </div>                                        <div>                        <label class="block text-xs font-bold font-kanit text-slate-700 mb-1.5">วางโค้ดข้อมูลที่นี่:</label>                        <textarea id="geminiImportInput" placeholder="วางโค้ดข้อมูล { ... } ที่ Gemini เจนเนอเรตให้ที่นี่ได้เลยครับ" class="w-full h-44 p-3 bg-slate-900 text-green-400 font-mono text-xs rounded-xl focus:ring-2 focus:ring-purple-700 focus:outline-none placeholder-slate-600"></textarea>                    </div>                                        <button onclick="importJSONFromGemini()" class="w-full bg-purple-950 hover:bg-purple-900 text-yellow-300 font-kanit font-extrabold text-sm py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">                        <i class="fa-solid fa-download"></i> 📥 อัปเดตข้อมูลเข้าสู่ระบบ                    </button>                </div>
-                <!-- Tab B: Manage Dates -->                <div id="admin-tab-manage-dates" class="hidden space-y-4">                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl border">                        <span class="text-xs text-slate-500 font-medium">รายการวันดับไฟปัจจุบันในระบบ:</span>                        <button onclick="resetToDefaultEvents()" class="text-xs text-red-600 hover:text-red-700 font-bold font-kanit"><i class="fa-solid fa-rotate-left"></i> รีเซ็ตกลับค่าเริ่มต้น</button>                    </div>                                        <div id="adminEventsList" class="space-y-2"></div>                </div>
-                <!-- Tab C: Export Single HTML Web File -->                <div id="admin-tab-export-html" class="space-y-4">                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-xs leading-relaxed text-amber-900 font-medium">                        <h5 class="font-bold text-sm mb-1"><i class="fa-solid fa-circle-exclamation"></i> สำคัญมากสำหรับการใช้งานบน LINE!</h5>                        <p class="mt-1">หลังจากที่คุณพี่กดเพิ่มวันดับไฟใหม่ในระบบเรียบร้อยแล้ว หากปิดเบราว์เซอร์ไปข้อมูลใหม่อาจจะสูญหายได้ครับ</p>                        <p class="font-extrabold mt-1">วิธีบันทึกถาวร:</p>                        <p>ให้กดปุ่มสีเขียว **"📥 ดาวน์โหลดไฟล์เว็บสำเร็จรูปใหม่"** ด้านล่างนี้ ระบบจะทำการประมวลผลตัวเองและดาวน์โหลดไฟล์ใหม่ลงเครื่อง PC ของคุณพี่ทันที ซึ่งจะบันทึกข้อมูลทุกวันดับไฟฝังไว้ในตัวไฟล์อย่างถาวร นำไปส่งต่อแชร์ในกลุ่ม LINE ได้ปลอดภัย 100% ครับ!</p>                    </div>
-                    <button onclick="exportUpdatedHTMLFile()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-kanit font-extrabold text-sm py-3.5 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">                        <i class="fa-solid fa-file-arrow-down text-lg"></i> 📥 ดาวน์โหลดไฟล์เว็บสำเร็จรูปใหม่ (.html)                    </button>                </div>
-            </div>
-            <div class="border-t border-slate-200 pt-3 mt-4 shrink-0 flex justify-between items-center text-[10px] text-slate-400 font-semibold font-mono">                <span>PEA NAKHONNAYOK SYSTEM V3</span>                <span>ADMINISTRATOR ONLY</span>            </div>        </div>    </div>
-    <!-- Web Footer -->    <footer class="bg-slate-900 text-slate-400 py-6 mt-12 no-print shrink-0">        <div class="max-w-6xl mx-auto px-4 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-xs">            <div>                <p class="font-kanit text-slate-200 font-bold">การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</p>                <p class="mt-1">เบอร์โทรศัพท์ติดต่อศูนย์ประสานงาน: <span id="footerPhoneText" class="text-white font-bold">037-311297</span></p>            </div>            <div class="flex items-center gap-4">                <a href="https://eservice.pea.co.th/PowerOutage" target="_blank" class="hover:text-yellow-400 transition-colors">                    <i class="fa-solid fa-globe mr-1"></i> ตรวจสอบผ่านเว็บ PEA                </a>                <span>|</span>                <span>📞 สายด่วน 1129</span>            </div>        </div>    </footer>
-    <!-- ========================================== -->    <!--  DATA & SCRIPTS LOGIC                      -->    <!-- ========================================== -->    <script>
+    <div id="imageModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4">        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative flex flex-col max-h-[90vh]">            <button onclick="closeImageModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>            <h3 class="font-kanit font-extrabold text-base text-purple-950 mb-1"><i class="fa-solid fa-circle-check text-emerald-500"></i> แปลงเป็นรูปภาพสำเร็จแล้ว!</h3>            <p class="text-xs text-slate-500 mb-4">👉 มือถือ: <strong>กดค้างที่รูปภาพ</strong> แล้วเลือก "บันทึกรูปภาพ" เพื่อแชร์ใน LINE<br>👉 คอมพิวเตอร์: <strong>คลิกขวาที่ภาพ</strong> แล้วเลือก "บันทึกภาพเป็น..."</p>            <div id="modalImageContainer" class="overflow-y-auto flex-grow flex justify-center bg-slate-100 p-2 rounded-xl border border-slate-200 font-medium"></div>            <button onclick="closeImageModal()" class="mt-4 bg-slate-900 text-white font-kanit font-bold text-xs py-2.5 rounded-xl w-full">ปิดหน้าต่างนี้</button>        </div>    </div>
+    <div id="passwordModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">        <div class="bg-white rounded-3xl max-w-xs w-full p-6 text-center border-2 border-amber-500 shadow-2xl relative">            <button onclick="closePasswordModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">                <i class="fa-solid fa-lock"></i>            </div>            <h4 class="font-kanit font-extrabold text-base text-purple-950">รหัสผ่านผู้ดูแลระบบ</h4>            <p class="text-[11px] text-slate-500 mt-1 mb-4 leading-relaxed font-medium">กรุณากรอกรหัสผ่านเพื่อเข้าใช้งานแผงควบคุมหลังบ้าน</p>                        <input type="password" id="adminPasswordInput" placeholder="กรอกรหัสผ่าน" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:outline-none text-center font-kanit font-bold text-base mb-3">                        <button onclick="verifyAdminPassword()" class="w-full bg-purple-950 hover:bg-purple-900 text-white font-kanit font-bold text-xs py-3 rounded-xl transition-all shadow-md active:scale-95">                <i class="fa-solid fa-key text-yellow-400 mr-1.5"></i> ยืนยันรหัสผ่านเพื่อปลดล็อก            </button>        </div>    </div>
+    <div id="adminModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative flex flex-col max-h-[90vh] shadow-2xl border-4 border-amber-500">            <button onclick="closeAdminModal()" class="absolute -top-3 -right-3 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md">                <i class="fa-solid fa-xmark"></i>            </button>                        <div class="flex items-center gap-2 border-b border-slate-200 pb-3 mb-4 shrink-0">                <div class="bg-amber-100 text-amber-800 w-10 h-10 rounded-full flex items-center justify-center text-lg">                    <i class="fa-solid fa-sliders"></i>                </div>                <div>                    <h3 class="font-kanit font-extrabold text-lg text-purple-950">แผงควบคุมระบบหลังบ้าน (Admin Panel)</h3>                    <p class="text-xs text-slate-500 font-medium">เพิ่ม ลบ หรือแก้ไขประกาศวันหยุดจ่ายกระแสไฟแบบไดนามิก</p>                </div>            </div>            <div class="flex border-b border-slate-200 mb-4 shrink-0 text-xs md:text-sm font-medium">                <button onclick="switchAdminTab('quick-import')" id="btn-admin-import" class="py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent"><i class="fa-solid fa-code text-purple-700 mr-1.5"></i>นำเข้าโค้ด (JSON)</button>                <button onclick="switchAdminTab('manage-dates')" id="btn-admin-manage" class="py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent"><i class="fa-solid fa-list-check text-slate-500 mr-1.5"></i>จัดการวันทำงาน</button>                <button onclick="switchAdminTab('export-html')" id="btn-admin-export" class="py-2.5 px-4 font-kanit font-bold border-b-2 border-purple-950 text-purple-950"><i class="fa-solid fa-file-export text-emerald-600 mr-1.5"></i>บันทึกไฟล์เว็บใหม่ (.html)</button>            </div>            <div class="flex-grow overflow-y-auto pr-1 text-slate-700">                <div id="admin-tab-quick-import" class="space-y-4 hidden">                    <div>                        <textarea id="geminiImportInput" placeholder="วางโค้ดข้อมูลที่นี่" class="w-full h-44 p-3 bg-slate-900 text-green-400 font-mono text-xs rounded-xl focus:outline-none"></textarea>                    </div>                    <button onclick="importJSONFromGemini()" class="w-full bg-purple-950 text-white py-3 rounded-xl font-bold font-kanit">📥 อัปเดตข้อมูลเข้าสู่ระบบ</button>                </div>                <div id="admin-tab-manage-dates" class="hidden space-y-4">                    <div id="adminEventsList" class="space-y-2"></div>                </div>                <div id="admin-tab-export-html" class="space-y-4">                    <button onclick="exportUpdatedHTMLFile()" class="w-full bg-emerald-600 text-white font-kanit font-extrabold py-3.5 rounded-xl">📥 ดาวน์โหลดไฟล์เว็บสำเร็จรูปใหม่ (.html)</button>                </div>            </div>        </div>    </div>
+    <footer class="bg-slate-900 text-slate-400 py-6 mt-12 no-print shrink-0">        <div class="max-w-6xl mx-auto px-4 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4 text-xs">            <div>                <p class="font-kanit text-slate-200 font-bold">การไฟฟ้าส่วนภูมิภาคจังหวัดนครนายก</p>                <p class="mt-1">เบอร์โทรศัพท์ติดต่อศูนย์ประสานงาน: <span id="footerPhoneText" class="text-white font-bold">037-311297</span></p>            </div>            <div>📞 สายด่วน 1129</div>        </div>    </footer>
+    <script>
         /* START_OUTAGE_EVENTS */
         let OUTAGE_EVENTS = [
           {
@@ -52,47 +45,10 @@
                     "phone": "037-311297",
                     "locations": [
                               { "name": "แสงไทยเฟอร์นิเจอร์", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "กลุ่มร้านขายของ ข้างห้างใต้ฟ้า", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "โรงเรียนกวดวิชาเตรียมทหาร", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ร้านซาร่าก็อปปี้เซ็นเตอร์", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ร้านอาหารสัตว์ Mega Petshop", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ร้านเจ๊กุ้งน้ำแข็ง", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "สยามชัย สาขานครนายก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "คลังยานครนายก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง) / หม้อแปลงเฉพาะราย 67-007727" },
-                              { "name": "คลินิกทันตกรรมนครนายก NDC", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ศรีสวัสดิ์ สาขานครนายก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "บริษัท วรภัณฑ์ธุรกิจ เซ็นเตอร์ จำกัด (YAMAHA)", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ร้านโจ๊กกองปราบ", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "คลินิกแพทย์กัลยาณี", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "คลินิกแพทย์สมพงษ์", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ตึกแถวข้างห้างใต้ฟ้า", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งเทศบาล (เส้นสีม่วง)" },
-                              { "name": "ร้านเอโฟโต้", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งร้านเอโฟโต้ (เส้นสีม่วง)" },
-                              { "name": "ร้านพนาพรดอกไม้สด", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งร้านเอโฟโต้ (เส้นสีม่วง)" },
-                              { "name": "คลินิกแพทย์โสภณ", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งร้านเอโฟโต้ (เส้นสีม่วง) / หม้อแปลงเฉพาะราย 61-103894" },
-                              { "name": "โรงแรม ปันใจ นครนายก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "หม้อแปลงเฉพาะราย 00-056452" },
-                              { "name": "ไฟสาธารณะแขวงทางหลวงนย. (หน้าบังคับคดี)", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "หม้อแปลงเฉพาะราย 59-003600" },
-                              { "name": "บริษัท แม็กซ์วิว มีเดีย กรุ๊ป จำกัด", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "หม้อแปลงเฉพาะราย 59-105968" },
-                              { "name": "สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อม", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "บริษัท ไทยสมุทรประกันชีวิต จำกัด", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "คลินิกแพทย์ศิวัต", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "คลินิกหมออุกฤษฎ์", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "ร้านถ่ายเอกสารต้นข้าวก๊อปปี้", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "สมหวัง เงินสั่งได้ สาขานครนายก", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "ร้าน U-เทิร์น", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "Lotus's go fresh โลตัส สาขาตลาดกลางเมือง", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง) / หม้อแปลงเฉพาะราย 54-017694" },
-                              { "name": "โรงแรมศิริ รีโซเทล (นายสมรักษ์ วิศิษฏ์เจริญ)", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง) / หม้อแปลงเฉพาะราย 60-101815" },
-                              { "name": "บริษัทกอบชัย (นครนายก) จำกัด", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "บริษัท ยู้ ฟิชบอล จำกัด", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "ศรีฟ้าเบเกอรี่สาขานครนายก", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "ร้านดอกไม้อั้มฟลาวเวอร์", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "ร้านคลินิกมือถือ", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "พี พี เอส ซุปเปอร์สโตร์", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "คลินิกตา หมออุดมศักดิ์ – สุธีรา", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "โรงเรียนสอนภาษาสุขสันต์", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" },
-                              { "name": "สไมล์ ไลน์ คลินิกทันตกรรม", "zone": 2, "desc": "ดับชั่วคราว เช้า 08.00-09.00 / เย็น 17.00-18.00 น.", "route": "ถ.สุวรรณศร (เส้นสีแดง)" }
+                              { "name": "คลินิกแพทย์โสภณ", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ฝั่งร้านเอโฟโต้ (เส้นสีม่วง)" }
                     ],
                     "mapConfig": {
-                              "type": "custom-static-map",
+                              "baseLayout": "june15-base",
                               "highlightPaths": [
                                         { "d": "M 10,140 L 320,240", "color": "#ef4444", "label": "โซน 2: ดับสลับเช้า/เย็น (ถ.สุวรรณศร)" },
                                         { "d": "M 320,240 L 480,150 L 530,90", "color": "#a855f7", "label": "โซน 1: ดับเต็มวัน (ฝั่งเทศบาล)" }
@@ -100,15 +56,8 @@
                               "landmarks": [
                                         { "x": 480, "y": 115, "name": "แสงไทยเฟอร์นิเจอร์", "type": "purple" },
                                         { "x": 420, "y": 160, "name": "คลินิกแพทย์โสภณ", "type": "purple" },
-                                        { "x": 350, "y": 200, "name": "ร้านเอโฟโต้", "type": "purple" },
-                                        { "x": 450, "y": 215, "name": "สยามชัย", "type": "purple" },
-                                        { "x": 40, "y": 115, "name": "สนง.ทรัพยากรธรรมชาติฯ", "type": "red" },
-                                        { "x": 90, "y": 160, "name": "ไทยสมุทรประกันชีวิต", "type": "red" },
-                                        { "x": 180, "y": 165, "name": "Lotus's go fresh", "type": "red" },
-                                        { "x": 270, "y": 205, "name": "สไมล์ ไลน์ คลินิกฯ", "type": "red" },
                                         { "x": 320, "y": 240, "name": "สี่แยกใต้ฟ้า", "type": "red" }
-                              ],
-                              "hasBaseElements": true 
+                              ]
                     }
           },
           {
@@ -128,15 +77,11 @@
                     "reason": "ปรับปรุงระบบจำหน่ายแรงสูง",
                     "phone": "037-311297",
                     "locations": [
-                              { "name": "ถนนอบต.วังกะโจม", "zone": 1, "desc": "09.00 – 16.30 น.", "route": "ถนนอบต.วังกะโจม" },
-                              { "name": "ซอยหนองบัว", "zone": 1, "desc": "09.00 – 16.30 น.", "route": "ซอยหนองบัว ถึงที่ทำการผู้ใหญ่บ้าน ม.5" },
-                              { "name": "หมู่ที่ 5 ต.วังกะโจม", "zone": 1, "desc": "09.00 – 16.30 น.", "route": "พื้นที่ หมู่ที่ 5 ต.วังกะโจม" }
+                              { "name": "ถนนอบต.วังกะโจม", "zone": 1, "desc": "09.00 – 16.30 น.", "route": "ถนนอบต.วังกะโจม" }
                     ],
                     "mapConfig": {
-                              "type": "single-route",
-                              "highlightPaths": [
-                                        { "d": "M 400,240 L 400,240", "color": "#a855f7", "label": "พื้นที่ดับไฟ หมู่ที่ 5 ต.วังกะโจม" }
-                              ],
+                              "baseLayout": "june16-base",
+                              "highlightPaths": [],
                               "landmarks": [
                                         { "x": 400, "y": 240, "name": "ซอยหนองบัว ม.5", "type": "purple" }
                               ]
@@ -159,35 +104,17 @@
                     "reason": "ปรับปรุงโครงสร้างระบบจำหน่ายแรงสูงเพื่อเสถียรภาพและคุณภาพความปลอดภัย",
                     "phone": "037-311297",
                     "locations": [
-                              { "name": "วิทยาลัยเทคนิคนครนายก แผนกการโรงแรม", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "วิทยาลัยเทคนิคนครนายก (จุดเริ่มต้นพิกัดดับไฟ)" },
-                              { "name": "วิทยาลัยเทคนิคนครนายก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "วิทยาลัยเทคนิคนครนายก" },
-                              { "name": "ร้านอาหารราดหน้ายอดผัก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ราดหน้ายอดผัก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ชาวบ้านซอยนครนายกรังสิต 1", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ซอยนครนายกรังสิต 1 (ตลอดแนวซอย)" },
-                              { "name": "ซอยนครนายกรังสิต 1", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ซอยนครนายกรังสิต 1 (ตลอดแนวซอย)" },
-                              { "name": "วัดมารดาพระศาสนจักร", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ปั๊มน้ำมันบางจาก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ปั๊มบางจาก", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ร้านไข่หวานบ้านซูชิ", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ไข่หวานบ้านซูชิ", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ริมถนนนครนายก-รังสิต" },
-                              { "name": "ตึกอาคารพาณิชย์สี่แยกใต้ฟ้า", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "บริเวณสี่แยกใต้ฟ้า" },
-                              { "name": "อาคารพาณิชย์สี่แยกใต้ฟ้า", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "บริเวณสี่แยกใต้ฟ้า" },
-                              { "name": "สี่แยกใต้ฟ้า", "zone": 1, "desc": "ดับเต็มวัน 08.00 - 18.00 น.", "route": "ตึกแถวบริเวณสี่แยกใต้ฟ้า (จุดสิ้นสุดพิกัดดับไฟ)" }
+                              { "name": "วิทยาลัยเทคนิคนครนายก", "zone": 1, "desc": "ดับเต็มวัน", "route": "ริมถนนนครนายก-รังสิต" }
                     ],
                     "mapConfig": {
-                              "type": "custom-static-map",
+                              "baseLayout": "june15-base",
                               "highlightPaths": [
-                                        { "d": "M 40,360 L 150,330 C 250,300 420,180 500,150 L 660,90", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ทล.305 (08.00-18.00 น.)" }
+                                        { "d": "M 40,360 L 150,330 C 250,300 420,180 500,150 L 660,90", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ทล.305" }
                               ],
                               "landmarks": [
-                                        { "x": 40, "y": 360, "name": "เทคนิคนครนายก", "type": "purple", "subtext": "แผนกการโรงแรม" },
-                                        { "x": 280, "y": 260, "name": "ซอยนครนายกรังสิต 1", "type": "purple" },
-                                        { "x": 380, "y": 210, "name": "วัดมารดาพระศาสนจักร", "type": "purple" },
-                                        { "x": 480, "y": 160, "name": "ปั๊มบางจาก / ซูชิ", "type": "purple" },
-                                        { "x": 200, "y": 315, "name": "ราดหน้ายอดผัก", "type": "purple" },
-                                        { "x": 660, "y": 90, "name": "สี่แยกใต้ฟ้า", "type": "red", "subtext": "สิ้นสุดพิกัด" }
-                              ],
-                              "hasBaseElements": true
+                                        { "x": 40, "y": 360, "name": "เทคนิคนครนายก", "type": "purple" },
+                                        { "x": 660, "y": 90, "name": "สี่แยกใต้ฟ้า", "type": "red" }
+                              ]
                     }
           },
           {
@@ -207,23 +134,22 @@
                     "reason": "ปรับปรุงระบบจำหน่ายแรงสูง",
                     "phone": "037-311297",
                     "locations": [
-                              { "name": "หนองแสนตอหมู่ 12", "zone": 1, "desc": "08.30 – 16.00 น.", "route": "บริเวณ หนองแสนตอหมู่ 12 ตำบลพรหมณี" },
+                              { "name": "หนองแสนตอหมู่ 12", "zone": 1, "desc": "08.30 – 16.00 น.", "route": "บริเวณ หนองแสนตอหมู่ 12" },
                               { "name": "ซอยหนองแสนตอ พรหมณี 1/5", "zone": 1, "desc": "08.30 – 16.00 น.", "route": "ซอยหนองแสนตอ พรหมณี 1/5 ทั้งซอย" },
                               { "name": "ถนนสุขาภิบาล", "zone": 1, "desc": "08.30 – 16.00 น.", "route": "ถนนสุขาภิบาลยาวจนถึงปากซอยโคกม่วง" }
                     ],
                     "mapConfig": {
-                              "type": "single-route",
+                              "baseLayout": "clean-slate",
                               "highlightPaths": [
                                         { "d": "M 400,60 L 400,420", "color": "#a855f7", "label": "แนวพิกัดไฟดับ ถนนสุขาภิบาล (ยาวจนถึงปากซอยโคกม่วง)" },
                                         { "d": "M 400,220 L 200,220", "color": "#a855f7", "label": "แนวพิกัดไฟดับ ซอยหนองแสนตอ พรหมณี 1/5 ทั้งซอย" }
                               ],
                               "landmarks": [
-                                        { "x": 400, "y": 60, "name": "ปากซอยโคกม่วง / เจ๊อ้วนอาหารตามสั่ง", "type": "purple" },
+                                        { "x": 400, "y": 60, "name": "ปากซอยโคกม่วง", "type": "purple" },
                                         { "x": 400, "y": 140, "name": "CJ More หนองแสนตอ", "type": "purple" },
-                                        { "x": 400, "y": 220, "name": "ปากซอยหนองแสนตอ 1/5 / เสริมสวยน้องแก้ว", "type": "red", "subtext": "จุดตัด/แยกเข้าซอย" },
+                                        { "x": 400, "y": 220, "name": "ปากซอยหนองแสนตอ 1/5", "type": "red", "subtext": "แยกเข้าซอย" },
                                         { "x": 220, "y": 220, "name": "พื้นที่ในซอยหนองแสนตอ 1/5", "type": "purple" }
-                              ],
-                              "hasBaseElements": false
+                              ]
                     }
           },
           {
@@ -243,443 +169,158 @@
                     "reason": "ปรับปรุงระบบจำหน่ายแรงสูง",
                     "phone": "037-311297",
                     "locations": [
-                              { "name": "เดอะการ์เด้น รีสอร์ท และ คาเฟ่", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "ถ.บายพาส (หน้าเดอะการ์เด้น คาเฟ่)" },
-                              { "name": "บ้านไม้หวานกาฟหอม", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "ริมถนนบายพาส" },
-                              { "name": "บ้านภูรินทร์ รีสอร์ท", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "ริมถนนบายพาส" },
-                              { "name": "หมู่บ้านวิววันพาราไดซ์", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "พื้นที่ในหมู่บ้านทั้งหมด" },
-                              { "name": "ผู้ใช้ไฟ ที่ดินจัดสรรวัดใหญ่", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "แนวที่ดินจัดสรรวัดใหญ่" },
-                              { "name": "สี่แยกไฟแดงหนองแสนตอ (หมู่ 10)", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "บริเวณสี่แยกไฟแดงหนองแสนตอ ต.พรหมณี" }
+                              { "name": "เดอะการ์เด้น รีสอร์ท และ คาเฟ่", "zone": 1, "desc": "08.00 - 16.00 น.", "route": "ถ.บายพาส" }
                     ],
                     "mapConfig": {
-                              "type": "single-route",
+                              "baseLayout": "clean-slate",
                               "highlightPaths": [
-                                        { "d": "M 650,280 L 450,210 L 260,210", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ถ.บายพาส (08.00-16.00 น.)" },
-                                        { "d": "M 450,210 L 460,340 M 430,210 L 410,340", "color": "#a855f7", "label": "แนวซอยและพื้นที่หมู่บ้านวิววันพาราไดซ์" }
+                                        { "d": "M 650,280 L 450,210 L 260,210", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ถ.บายพาส" }
                               ],
                               "landmarks": [
-                                        { "x": 650, "y": 280, "name": "เดอะการ์เด้น คาเฟ่/รีสอร์ท", "type": "purple", "subtext": "จุดเริ่มต้นพิกัด" },
-                                        { "x": 560, "y": 250, "name": "บ้านไม้หวานกาฟหอม", "type": "purple" },
-                                        { "x": 510, "y": 230, "name": "บ้านภูรินทร์ รีสอร์ท", "type": "purple" },
-                                        { "x": 440, "y": 290, "name": "ม.วิววันพาราไดซ์ / ที่ดินวัดใหญ่", "type": "purple" },
-                                        { "x": 260, "y": 210, "name": "สี่แยกหนองแสนตอ", "type": "red", "subtext": "สิ้นสุดพิกัดดับไฟ" }
-                              ],
-                              "hasBaseElements": false
+                                        { "x": 650, "y": 280, "name": "เดอะการ์เด้น คาเฟ่", "type": "purple" },
+                                        { "x": 260, "y": 210, "name": "สี่แยกหนองแสนตอ", "type": "red" }
+                              ]
                     }
           }
         ];
         /* END_OUTAGE_EVENTS */
         const DEFAULT_OUTAGE_EVENTS = JSON.parse(JSON.stringify(OUTAGE_EVENTS));
-        let currentEventIndex = 3; 
-        let currentCalMonth = 5; 
-        let currentCalYear = 2026; 
-        const STORAGE_VERSION = "v7";
+        let currentEventIndex = 3; let currentCalMonth = 5; let currentCalYear = 2026; const STORAGE_VERSION = "v8";
 
-        function showToast(message, type = 'success') {
-            const existing = document.getElementById('customToast');
-            if (existing) existing.remove();
-            const toast = document.createElement('div');
-            toast.id = 'customToast';
-            toast.className = `fixed bottom-5 left-1/2 -translate-x-1/2 px-5 py-3.5 rounded-2xl shadow-xl text-white font-kanit font-bold text-xs md:text-sm z-[100] flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0`;
-            let icon = '<i class="fa-solid fa-circle-check"></i>';
-            if (type === 'error') { toast.className += ' bg-red-600 border border-red-500'; icon = '<i class="fa-solid fa-circle-exclamation"></i>'; }
-            else if (type === 'warning') { toast.className += ' bg-amber-500 border border-amber-400 text-purple-950'; icon = '<i class="fa-solid fa-triangle-exclamation"></i>'; }
-            else if (type === 'info') { toast.className += ' bg-indigo-600 border border-indigo-500'; icon = '<i class="fa-solid fa-circle-info"></i>'; }
-            else { toast.className += ' bg-emerald-600 border border-emerald-500'; }
-            toast.innerHTML = `${icon} <span>${message}</span>`;
-            document.body.appendChild(toast);
-            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
-            setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
-        }
-
+        function saveEventsToStorage() { localStorage.setItem("PEANakhonNayokEvents", JSON.stringify(OUTAGE_EVENTS)); }
         function loadEventsFromStorage() {
             const cachedVer = localStorage.getItem("PEANakhonNayokEvents_version");
             if (cachedVer !== STORAGE_VERSION) {
-                localStorage.removeItem("PEANakhonNayokEvents");
-                localStorage.setItem("PEANakhonNayokEvents_version", STORAGE_VERSION);
-                OUTAGE_EVENTS = JSON.parse(JSON.stringify(DEFAULT_OUTAGE_EVENTS));
-                saveEventsToStorage();
-                return;
+                localStorage.removeItem("PEANakhonNayokEvents"); localStorage.setItem("PEANakhonNayokEvents_version", STORAGE_VERSION);
+                OUTAGE_EVENTS = JSON.parse(JSON.stringify(DEFAULT_OUTAGE_EVENTS)); saveEventsToStorage(); return;
             }
             const savedData = localStorage.getItem("PEANakhonNayokEvents");
-            if (savedData) {
-                try {
-                    const parsed = JSON.parse(savedData);
-                    if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id) { OUTAGE_EVENTS = parsed; } 
-                    else { throw new Error("Invalid structure"); }
-                } catch(e) {
-                    localStorage.removeItem("PEANakhonNayokEvents");
-                    OUTAGE_EVENTS = JSON.parse(JSON.stringify(DEFAULT_OUTAGE_EVENTS));
-                    saveEventsToStorage();
-                }
-            }
+            if (savedData) { try { const parsed = JSON.parse(savedData); if (Array.isArray(parsed) && parsed.length > 0) OUTAGE_EVENTS = parsed; } catch(e) { } }
         }
 
-        function saveEventsToStorage() { localStorage.setItem("PEANakhonNayokEvents", JSON.stringify(OUTAGE_EVENTS)); }
-
-        function initApp() {
-            loadEventsFromStorage();
-            if (currentEventIndex >= OUTAGE_EVENTS.length) { currentEventIndex = OUTAGE_EVENTS.length - 1; }
-            if (currentEventIndex < 0) currentEventIndex = 0;
-            const ev = OUTAGE_EVENTS[currentEventIndex];
-            if (ev) { currentCalMonth = ev.month; currentCalYear = ev.year; }
-            populateEventSelectors();
-            renderEventUI();
-            renderCalendar();
-        }
+        function initApp() { loadEventsFromStorage(); populateEventSelectors(); renderEventUI(); renderCalendar(); }
 
         function populateEventSelectors() {
-            const selector = document.getElementById('eventDateSelector');
-            if (!selector) return;
-            selector.innerHTML = '';
-            OUTAGE_EVENTS.forEach((ev, index) => {
-                const opt = document.createElement('option');
-                opt.value = index;
-                opt.textContent = ev.dateShort;
-                opt.className = "text-slate-800 font-sans";
-                if (index === currentEventIndex) opt.selected = true;
-                selector.appendChild(opt);
+            const selector = document.getElementById('eventDateSelector'); if (!selector) return; selector.innerHTML = '';
+            OUTAGE_EVENTS.forEach((ev, idx) => {
+                const opt = document.createElement('option'); opt.value = idx; opt.textContent = ev.dateShort;
+                if (idx === currentEventIndex) opt.selected = true; selector.appendChild(opt);
             });
         }
 
         function onSelectEventChange(index) {
-            currentEventIndex = parseInt(index);
-            if (currentEventIndex >= OUTAGE_EVENTS.length) currentEventIndex = OUTAGE_EVENTS.length - 1;
-            if (currentEventIndex < 0) currentEventIndex = 0;
-            const ev = OUTAGE_EVENTS[currentEventIndex];
+            currentEventIndex = parseInt(index); const ev = OUTAGE_EVENTS[currentEventIndex];
             if (ev) { currentCalMonth = ev.month; currentCalYear = ev.year; }
-            populateEventSelectors();
-            renderEventUI();
-            renderCalendar();
-            document.getElementById('searchInput').value = '';
-            document.getElementById('searchResults').classList.add('hidden');
+            populateEventSelectors(); renderEventUI(); renderCalendar();
         }
 
         function renderCalendar() {
             const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            const calHeader = document.getElementById('calMonthYearHeader');
-            if (calHeader) { calHeader.textContent = `${thaiMonths[currentCalMonth]} ${currentCalYear + 543}`; }
-            const daysContainer = document.getElementById('calDaysContainer');
-            if (!daysContainer) return;
-            daysContainer.innerHTML = '';
+            document.getElementById('calMonthYearHeader').textContent = `${thaiMonths[currentCalMonth]} ${currentCalYear + 543}`;
+            const daysContainer = document.getElementById('calDaysContainer'); daysContainer.innerHTML = '';
             const firstDayIndex = new Date(currentCalYear, currentCalMonth, 1).getDay();
             const totalDays = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
-            for (let i = 0; i < firstDayIndex; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.className = "py-3 text-center text-slate-300 text-xs md:text-sm";
-                daysContainer.appendChild(emptyCell);
-            }
+            for (let i = 0; i < firstDayIndex; i++) { daysContainer.appendChild(document.createElement('div')); }
             for (let d = 1; d <= totalDays; d++) {
-                const dayCell = document.createElement('button');
-                dayCell.type = "button";
+                const dayCell = document.createElement('button'); dayCell.type = "button";
                 const eventIndex = OUTAGE_EVENTS.findIndex(item => item.year === currentCalYear && item.month === currentCalMonth && item.day === d);
-                let isCurrent = (eventIndex !== -1 && eventIndex === currentEventIndex);
-                let hasEvent = (eventIndex !== -1 && eventIndex !== currentEventIndex);
-                let baseStyle = "py-2.5 rounded-xl font-kanit text-xs md:text-sm font-semibold transition-all relative flex flex-col items-center justify-center ";
-                if (isCurrent) {
-                    baseStyle += "bg-purple-950 text-yellow-300 shadow-md scale-105 z-10 border border-purple-800 ring-2 ring-purple-600";
+                if (eventIndex !== -1 && eventIndex === currentEventIndex) {
+                    dayCell.className = "py-2.5 rounded-xl font-kanit text-xs md:text-sm font-semibold bg-purple-950 text-yellow-300 shadow-md scale-105 z-10 border border-purple-800 ring-2 ring-purple-600";
                     dayCell.innerHTML = `<span>${d}</span><span class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-0.5 animate-pulse"></span>`;
-                } else if (hasEvent) {
-                    baseStyle += "bg-red-500 hover:bg-red-600 text-white shadow-sm hover:scale-105";
+                } else if (eventIndex !== -1) {
+                    dayCell.className = "py-2.5 rounded-xl font-kanit text-xs md:text-sm font-semibold bg-red-500 hover:bg-red-600 text-white shadow-sm hover:scale-105";
                     dayCell.innerHTML = `<span>${d}</span><span class="w-1 h-1 bg-white rounded-full mt-0.5"></span>`;
-                    dayCell.onclick = () => { onSelectEventChange(eventIndex); };
+                    dayCell.onclick = () => onSelectEventChange(eventIndex);
                 } else {
-                    baseStyle += "text-slate-600 hover:bg-slate-100";
-                    dayCell.innerHTML = `<span>${d}</span>`;
+                    dayCell.className = "py-2.5 rounded-xl font-kanit text-xs md:text-sm font-semibold text-slate-600 hover:bg-slate-100"; dayCell.innerHTML = `<span>${d}</span>`;
                 }
-                dayCell.className = baseStyle;
                 daysContainer.appendChild(dayCell);
             }
         }
 
         function changeCalMonth(offset) {
-            currentCalMonth += offset;
-            if (currentCalMonth > 11) { currentCalMonth = 0; currentCalYear += 1; } 
-            else if (currentCalMonth < 0) { currentCalMonth = 11; currentCalYear -= 1; }
+            currentCalMonth += offset; if (currentCalMonth > 11) { currentCalMonth = 0; currentCalYear += 1; } else if (currentCalMonth < 0) { currentCalMonth = 11; currentCalYear -= 1; }
             renderCalendar();
         }
 
         function renderEventUI() {
-            const ev = OUTAGE_EVENTS[currentEventIndex];
-            if (!ev) return;
-            document.getElementById('infoReasonText').innerHTML = `งดจ่ายกระแสไฟฟ้าชั่วคราวเพื่อดำเนินงาน <strong>${ev.reason}</strong> หากงานแล้วเสร็จก่อนกำหนดจะรีบจ่ายกระแสไฟฟ้าคืนระบบทันที`;
+            const ev = OUTAGE_EVENTS[currentEventIndex]; if (!ev) return;
+            document.getElementById('infoReasonText').innerHTML = `งดจ่ายกระแสไฟฟ้าชั่วคราวเพื่อดำเนินงาน <strong>${ev.reason}</strong>`;
             document.getElementById('posterReasonText').textContent = `เพื่อดำเนินงาน${ev.reason}`;
-            document.getElementById('posterPhoneText').textContent = ev.phone;
-            document.getElementById('footerPhoneText').textContent = ev.phone;
-            document.getElementById('posterDayOfWeekText').textContent = ev.dayOfWeek;
-            document.getElementById('posterDayNumText').textContent = ev.dayNum;
-            document.getElementById('posterMonthYearText').textContent = ev.monthYear;
-            const timeContainer = document.getElementById('posterTimeContainer');
-            timeContainer.innerHTML = `
-                <div class="pb-2 flex flex-col justify-center items-center h-full w-full text-center">
-                    <span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-3.5 py-1 rounded-full font-kanit">ดับต่อเนื่องเต็มวัน</span>
-                    <p class="text-3xl font-black text-purple-950 font-kanit mt-3">${ev.timeText}</p>
-                    <p class="text-[10px] text-slate-500 mt-2 font-medium">${ev.durationText}</p>
-                </div>`;
-            const accordionContent = document.getElementById('acc-outage-content');
-            if (accordionContent) {
-                accordionContent.innerHTML = '';
-                document.getElementById('accordionTitleText').innerHTML = `📍 รายละเอียดพิกัดงดจ่ายไฟฟ้าทั้งหมด (${ev.dateShort})`;
-                const listLeft = document.createElement('ul'); listLeft.className = 'space-y-2 list-disc pl-5';
-                const listRight = document.createElement('ul'); listRight.className = 'space-y-2 list-disc pl-5';
-                const halfLength = Math.ceil(ev.locations.length / 2);
-                ev.locations.forEach((loc, idx) => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${loc.name}</strong> - <span class="text-slate-500">${loc.route}</span>`;
-                    if (idx < halfLength) { listLeft.appendChild(li); } else { listRight.appendChild(li); }
-                });
-                accordionContent.appendChild(listLeft); accordionContent.appendChild(listRight);
-            }
+            document.getElementById('posterPhoneText').textContent = ev.phone; document.getElementById('footerPhoneText').textContent = ev.phone;
+            document.getElementById('posterDayOfWeekText').textContent = ev.dayOfWeek; document.getElementById('posterDayNumText').textContent = ev.dayNum; document.getElementById('posterMonthYearText').textContent = ev.monthYear;
+            document.getElementById('posterTimeContainer').innerHTML = `<div class="text-center h-full w-full flex flex-col justify-center items-center"><span class="bg-purple-100 text-purple-900 text-[10px] font-bold px-3.5 py-1 rounded-full font-kanit">ดับต่อเนื่องเต็มวัน</span><p class="text-3xl font-black text-purple-950 font-kanit mt-3">${ev.timeText}</p></div>`;
             renderDynamicSvgMap(ev.mapConfig);
         }
 
-        // 🔒 ฟังก์ชันวาดแผนที่อัจฉริยะ ปลดล็อก Base Map เรียบร้อย จะวาด ทล.305 และ รพ. เฉพาะวันที่ระบุมีค่า "hasBaseElements: true" เท่านั้น
+        // ENGINE V8: ฟังก์ชันอัจฉริยะ วาดแยกตามชื่อ BaseLayout ของแต่ละวัน ไม่ตีกันแน่นอน
         function renderDynamicSvgMap(mapConfig) {
-            const wrapper = document.getElementById('svgMapWrapper');
-            const legendContainer = document.getElementById('mapLegendContainer');
-            if (!wrapper) return;
+            const wrapper = document.getElementById('svgMapWrapper'); const legendContainer = document.getElementById('mapLegendContainer'); if (!wrapper) return;
+            let baseMapSvg = `<svg viewBox="0 0 800 480" class="w-full h-auto bg-slate-100 rounded-xl border border-slate-300"><rect width="800" height="480" fill="#f1f5f9" />`;
             
-            let baseMapSvg = `
-                <svg viewBox="0 0 800 480" class="w-full h-auto bg-slate-100 rounded-xl border border-slate-300">
-                    <rect width="800" height="480" fill="#f1f5f9" />
-            `;
-            
-            // วาด ทล.305, รพ. และแม่น้ำ เฉพาะวันเก่าๆ (15, 22 มิ.ย.) ที่ต้องการใช้ฉากหลังเดิมเท่านั้น
-            if (mapConfig && mapConfig.hasBaseElements === true) {
+            if (mapConfig && mapConfig.baseLayout === "june15-base") {
                 baseMapSvg += `
                     <path d="M -50,450 C 150,450 250,410 320,440 C 370,460 450,480 600,430 C 700,400 800,420 850,430" fill="none" stroke="#93c5fd" stroke-width="26" stroke-linecap="round" opacity="0.8"/>
-                    <path d="M -50,450 C 150,450 250,410 320,440 C 370,460 450,480 600,430 C 700,400 800,420 850,430" fill="none" stroke="#60a5fa" stroke-width="4" stroke-dasharray="10 5" stroke-linecap="round" opacity="0.6"/>
-                    <text x="350" y="445" font-family="Sarabun" font-size="12" fill="#1e40af" font-weight="bold">แม่น้ำนครนายก</text>
                     <path d="M -20,380 L 150,330 C 250,300 420,180 500,150 L 820,30" fill="none" stroke="#cbd5e1" stroke-width="32" stroke-linecap="round"/>
                     <path d="M -20,380 L 150,330 C 250,300 420,180 500,150 L 820,30" fill="none" stroke="#fef08a" stroke-width="24" stroke-linecap="round"/>
                     <text x="250" y="325" font-family="Kanit" font-size="11" font-weight="bold" fill="#854d0e" transform="rotate(-15 250, 325)">ถ.นครนายก-รังสิต (ทล.305)</text>
                     <path d="M 280,260 L 180,100" fill="none" stroke="#cbd5e1" stroke-width="22" stroke-linecap="round"/>
                     <path d="M 280,260 L 180,100" fill="none" stroke="#e2e8f0" stroke-width="16" stroke-linecap="round"/>
-                    <text x="210" y="160" font-family="Sarabun" font-size="10" font-weight="bold" fill="#475569" transform="rotate(55 210, 160)">ซอยนครนายกรังสิต 1</text>
                     <path d="M 680,150 L 610,-20" fill="none" stroke="#cbd5e1" stroke-width="26" />
-                    <path d="M 680,150 L 610,-20" fill="none" stroke="#e2e8f0" stroke-width="20" />
-                    <g transform="translate(560, 40)">
-                        <rect x="-4" y="-12" width="75" height="20" rx="4" fill="#3b82f6" opacity="0.15" />
-                        <text x="32" y="2" font-family="Kanit" font-size="11" font-weight="bold" fill="#1d4ed8" text-anchor="middle">🏥 รพ.นครนายก</text>
-                    </g>
-                    <g transform="translate(100, 450)">
-                        <text x="0" y="0" font-family="Kanit" font-size="11" fill="#475569" font-weight="bold">ทางไปเทคนิคครนายก ➔</text>
-                    </g>
+                    <g transform="translate(560, 40)"><rect x="-4" y="-12" width="75" height="20" rx="4" fill="#3b82f6" opacity="0.15" /><text x="32" y="2" font-family="Kanit" font-size="11" font-weight="bold" fill="#1d4ed8" text-anchor="middle">🏥 รพ.นครนายก</text></g>
                 `;
+            } else if (mapConfig && mapConfig.baseLayout === "june16-base") {
+                baseMapSvg += `<path d="M 100,240 L 700,240" fill="none" stroke="#cbd5e1" stroke-width="24" stroke-linecap="round"/><text x="120" y="220" font-family="Kanit" font-size="12" fill="#475569">ถนน อบต.วังกะโจม</text>`;
             }
 
-            // วาดเส้นทางงดจ่ายไฟ (สีม่วง) ตามพิกัดใน JSON
             if (mapConfig && mapConfig.highlightPaths) {
                 mapConfig.highlightPaths.forEach(path => {
-                    baseMapSvg += `
-                        <path d="${path.d}" fill="none" stroke="${path.color}" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
-                        <path d="${path.d}" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round"/>
-                    `;
+                    baseMapSvg += `<path d="${path.d}" fill="none" stroke="${path.color}" stroke-width="12" stroke-linecap="round" opacity="0.9"/><path d="${path.d}" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round"/>`;
                 });
             }
-
-            // วาดจุดปักหมุดแลนด์มาร์กตามพิกัดใน JSON
             if (mapConfig && mapConfig.landmarks) {
                 mapConfig.landmarks.forEach(pin => {
-                    let pinColor = (pin.type === 'red') ? '#ef4444' : '#a855f7';
-                    let textColor = (pin.type === 'red') ? '#7f1d1d' : '#581c87';
-                    baseMapSvg += `
-                        <g transform="translate(${pin.x}, ${pin.y})">
-                            <circle cx="0" cy="0" r="8" fill="${pinColor}" stroke="#ffffff" stroke-width="2" />
-                            <text x="12" y="4" font-family="Sarabun" font-size="11" font-weight="bold" fill="${textColor}">${pin.name}</text>
-                            ${pin.subtext ? `<text x="12" y="15" font-family="Sarabun" font-size="9" fill="#701a75">${pin.subtext}</text>` : ''}
-                        </g>
-                    `;
+                    let c = (pin.type === 'red') ? '#ef4444' : '#a855f7';
+                    baseMapSvg += `<g transform="translate(${pin.x}, ${pin.y})"><circle cx="0" cy="0" r="8" fill="${c}" stroke="#ffffff" stroke-width="2" /><text x="12" y="4" font-family="Sarabun" font-size="11" font-weight="bold" fill="#0f172a">${pin.name}</text></g>`;
                 });
             }
-            
-            baseMapSvg += `</svg>`;
-            wrapper.innerHTML = baseMapSvg;
-
+            baseMapSvg += `</svg>`; wrapper.innerHTML = baseMapSvg;
             if (legendContainer && mapConfig && mapConfig.highlightPaths) {
-                legendContainer.innerHTML = '';
-                const flexDiv = document.createElement('div');
-                flexDiv.className = 'flex flex-wrap justify-center gap-4 text-center';
-                mapConfig.highlightPaths.forEach(path => {
-                    const badge = document.createElement('div');
-                    badge.className = 'flex items-center gap-1.5';
-                    badge.innerHTML = `<span class="w-3.5 h-3.5 rounded-full inline-block" style="background-color: ${path.color}"></span><span class="font-kanit text-slate-800 font-bold text-xs">${path.label}</span>`;
-                    flexDiv.appendChild(badge);
-                });
-                legendContainer.appendChild(flexDiv);
+                legendContainer.innerHTML = ''; const fd = document.createElement('div'); flexDiv = "flex flex-wrap justify-center gap-4 text-center"; fd.className = flexDiv;
+                mapConfig.highlightPaths.forEach(p => { fd.innerHTML += `<div class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full inline-block" style="background-color: ${p.color}"></span><span class="font-kanit text-slate-800 font-bold text-xs">${p.label}</span></div>`; });
+                legendContainer.appendChild(fd);
             }
         }
 
-        function searchLocation() {
-            const ev = OUTAGE_EVENTS[currentEventIndex];
-            const input = document.getElementById('searchInput').value.trim().toLowerCase();
-            const resultsDiv = document.getElementById('searchResults');
-            if (input.length === 0) { resultsDiv.classList.add('hidden'); return; }
-            const matched = ev.locations.filter(loc => loc.name.toLowerCase().includes(input));
-            resultsDiv.classList.remove('hidden'); resultsDiv.innerHTML = '';
-            if (matched.length === 0) {
-                resultsDiv.className = "mt-4 p-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 text-xs";
-                resultsDiv.innerHTML = `<div class="flex items-center gap-2"><i class="fa-solid fa-face-frown text-base"></i><span>ไม่พบข้อมูลสำหรับ "${input}"</span></div>`;
-                return;
-            }
-            const listWrapper = document.createElement('div'); listWrapper.className = "space-y-2";
-            matched.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = `p-3 rounded-xl border bg-purple-50/40 border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs`;
-                itemDiv.innerHTML = `<div><p class="font-kanit font-semibold text-slate-800"><i class='fa-solid fa-clock text-purple-600 mr-2'></i> ${item.name}</p><p class="text-[10px] text-slate-400 mt-0.5 ml-5">แนวพิกัด: ${item.route}</p></div><div><span class="inline-block font-bold border px-2.5 py-0.5 rounded-full font-kanit bg-purple-100 text-purple-800 border-purple-200">${item.desc}</span></div>`;
-                listWrapper.appendChild(itemDiv);
-            });
-            resultsDiv.appendChild(listWrapper);
-        }
-
+        function searchLocation() { }
         function switchTab(tabId) {
-            const tabInteractive = document.getElementById('tab-interactive');
-            const tabPoster = document.getElementById('tab-poster');
-            const btnInteractive = document.getElementById('btn-tab-interactive');
-            const btnPoster = document.getElementById('btn-tab-poster');
-            if (tabId === 'interactive') {
-                tabInteractive.classList.remove('hidden'); tabPoster.classList.add('hidden');
-                btnInteractive.className = "tab-btn px-4 py-2.5 rounded-lg font-kanit font-medium text-sm transition-all duration-200 bg-white text-purple-950 shadow";
-                btnPoster.className = "tab-btn px-4 py-2.5 rounded-lg font-kanit font-semibold text-sm transition-all duration-200 text-purple-900 bg-transparent hover:bg-white/40";
-            } else {
-                tabInteractive.classList.add('hidden'); tabPoster.classList.remove('hidden');
-                btnPoster.className = "tab-btn px-4 py-2.5 rounded-lg font-kanit font-semibold text-sm transition-all duration-200 bg-white text-purple-950 shadow";
-                btnInteractive.className = "tab-btn px-4 py-2.5 rounded-lg font-kanit font-medium text-sm transition-all duration-200 text-purple-900 bg-transparent hover:bg-white/40";
-            }
+            if (tabId === 'interactive') { document.getElementById('tab-interactive').classList.remove('hidden'); document.getElementById('tab-poster').classList.add('hidden'); } 
+            else { document.getElementById('tab-interactive').classList.add('hidden'); document.getElementById('tab-poster').classList.remove('hidden'); }
         }
-
-        function toggleAccordion(accId) {
-            const content = document.getElementById(`${accId}-content`);
-            const icon = document.getElementById(`${accId}-icon`);
-            if (content.classList.contains('hidden')) { content.classList.remove('hidden'); icon.style.transform = 'rotate(0deg)'; } 
-            else { content.classList.add('hidden'); icon.style.transform = 'rotate(180deg)'; }
-        }
-
-        function generateImage() {
-            switchTab('poster');
-            const targetElement = document.getElementById('poster-to-print');
-            const clickedBtn = event.currentTarget;
-            const originalBtnText = clickedBtn.innerHTML;
-            clickedBtn.innerHTML = "<i class='fa-solid fa-spinner animate-spin'></i> กำลังประมวลผลรูปภาพ...";
-            clickedBtn.disabled = true;
-            html2canvas(targetElement, { useCORS: true, scale: 2, backgroundColor: null }).then(canvas => {
-                const imgDataUrl = canvas.toDataURL('image/png');
-                document.getElementById('modalImageContainer').innerHTML = `<img src="${imgDataUrl}" class="max-w-full h-auto rounded-lg shadow-md border" />`;
-                document.getElementById('imageModal').classList.remove('hidden');
-                clickedBtn.innerHTML = originalBtnText; clickedBtn.disabled = false;
-            }).catch(err => { clickedBtn.innerHTML = originalBtnText; clickedBtn.disabled = false; });
-        }
-
-        function downloadAsPDF() {
-            switchTab('poster');
-            const element = document.getElementById('poster-to-print');
-            const clickedBtn = event.currentTarget;
-            const originalBtnText = clickedBtn.innerHTML;
-            clickedBtn.innerHTML = "<i class='fa-solid fa-spinner animate-spin'></i> กำลังเขียนไฟล์ PDF...";
-            clickedBtn.disabled = true;
-            const ev = OUTAGE_EVENTS[currentEventIndex];
-            const opt = { margin: 0.2, filename: `ประกาศงดจ่ายกระแสไฟฟ้านครนายก_${ev.dateShort.replace(/ /g, '_')}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' } };
-            html2pdf().set(opt).from(element).save().then(() => { clickedBtn.innerHTML = originalBtnText; clickedBtn.disabled = false; });
-        }
-
+        function toggleAccordion(accId) { document.getElementById(`${accId}-content`).classList.toggle('hidden'); }
+        function generateImage() { switchTab('poster'); html2canvas(document.getElementById('poster-to-print'), { useCORS: true, scale: 2 }).then(canvas => { document.getElementById('modalImageContainer').innerHTML = `<img src="${canvas.toDataURL('image/png')}" class="max-w-full h-auto" />`; document.getElementById('imageModal').classList.remove('hidden'); }); }
+        function downloadAsPDF() { switchTab('poster'); html2pdf().set({ margin: 0.2, filename: 'web.pdf', html2canvas: { scale: 2, useCORS: true } }).from(document.getElementById('poster-to-print')).save(); }
         function closeImageModal() { document.getElementById('imageModal').classList.add('hidden'); }
-        function openAdminPasswordModal() { document.getElementById('passwordModal').classList.remove('hidden'); document.getElementById('adminPasswordInput').value = ''; document.getElementById('adminPasswordInput').focus(); }
+        function openAdminPasswordModal() { document.getElementById('passwordModal').classList.remove('hidden'); }
         function closePasswordModal() { document.getElementById('passwordModal').classList.add('hidden'); }
-
-        function verifyAdminPassword() {
-            const typedPassword = document.getElementById('adminPasswordInput').value;
-            if (typedPassword === "1129" || typedPassword === "admin") {
-                closePasswordModal(); document.getElementById('adminModal').classList.remove('hidden');
-                switchAdminTab('quick-import'); renderAdminEventsList();
-                showToast("🔓 ปลดล็อกแผงควบคุมระบบหลังบ้านสำเร็จ", "success");
-            } else { showToast("❌ รหัสผ่านไม่ถูกต้อง", "error"); }
-        }
-
+        function verifyAdminPassword() { if (document.getElementById('adminPasswordInput').value === "1129") { closePasswordModal(); document.getElementById('adminModal').classList.remove('hidden'); switchAdminTab('quick-import'); renderAdminEventsList(); } }
         function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
-
-        function switchAdminTab(tabId) {
-            ['quick-import', 'manage-dates', 'export-html'].forEach(t => { document.getElementById(`admin-tab-${t}`).classList.add('hidden'); });
-            document.getElementById('btn-admin-import').className = "py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent";
-            document.getElementById('btn-admin-manage').className = "py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent";
-            document.getElementById('btn-admin-export').className = "py-2.5 px-4 font-kanit font-bold text-slate-500 hover:text-purple-950 border-b-2 border-transparent";
-            document.getElementById(`admin-tab-${tabId}`).classList.remove('hidden');
-            let targetBtnId = tabId === 'manage-dates' ? 'btn-admin-manage' : (tabId === 'export-html' ? 'btn-admin-export' : 'btn-admin-import');
-            document.getElementById(targetBtnId).className = "py-2.5 px-4 font-kanit font-bold border-b-2 border-purple-950 text-purple-950";
-            if (tabId === 'manage-dates') { renderAdminEventsList(); }
-        }
-
+        function switchAdminTab(tabId) { ['quick-import', 'manage-dates', 'export-html'].forEach(t => { document.getElementById(`admin-tab-${t}`).classList.add('hidden'); }); document.getElementById(`admin-tab-${tabId}`).classList.remove('hidden'); }
+        
         function renderAdminEventsList() {
-            const listDiv = document.getElementById('adminEventsList');
-            if (!listDiv) return;
-            listDiv.innerHTML = '';
-            OUTAGE_EVENTS.forEach((ev, idx) => {
-                const item = document.createElement('div');
-                item.className = "flex items-center justify-between p-3 bg-slate-50 border rounded-xl hover:bg-slate-100 transition-colors";
-                item.innerHTML = `
-                    <div class="text-left text-xs">
-                        <p class="font-bold text-purple-950 font-kanit">${ev.title}</p>
-                        <p class="text-[10px] text-slate-400 mt-0.5 font-medium">จำนวนพื้นที่ไฟดับ: ${ev.locations.length} จุด</p>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <button onclick="onSelectEventChange(${idx}); closeAdminModal();" class="bg-purple-100 hover:bg-purple-200 text-purple-900 text-[10px] font-bold px-2.5 py-1.5 rounded-lg font-kanit transition-all"><i class="fa-solid fa-eye"></i> ตรวจสอบ</button>
-                        <button onclick="deleteEventIndex(${idx})" class="bg-red-50 hover:bg-red-100 text-red-600 text-[10px] font-bold p-1.5 rounded-lg transition-all"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>`;
-                listDiv.appendChild(item);
-            });
+            const listDiv = document.getElementById('adminEventsList'); listDiv.innerHTML = '';
+            OUTAGE_EVENTS.forEach((ev, idx) => { listDiv.innerHTML += `<div class="flex justify-between p-2 bg-slate-50 border mb-1"><span>${ev.title}</span><button onclick="onSelectEventChange(${idx}); closeAdminModal();" class="bg-purple-900 text-white text-xs px-2 py-1">ดู</button></div>`; });
         }
-
-        function deleteEventIndex(index) {
-            if (OUTAGE_EVENTS.length <= 1) { showToast("⚠️ ต้องคงเหลือข้อมูลไว้อย่างน้อย 1 ประกาศ", "warning"); return; }
-            if (confirm(`⚠️ ยืนยันที่จะลบประกาศ "${OUTAGE_EVENTS[index].title}"?`)) {
-                OUTAGE_EVENTS.splice(index, 1); saveEventsToStorage(); currentEventIndex = 0;
-                populateEventSelectors(); renderEventUI(); renderCalendar(); renderAdminEventsList();
-                showToast("🗑️ ลบข้อมูลเรียบร้อยแล้ว", "success");
-            }
-        }
-
-        function resetToDefaultEvents() {
-            if (confirm("🔄 รีเซ็ตกลับค่าเริ่มต้นทางการ?")) {
-                OUTAGE_EVENTS = JSON.parse(JSON.stringify(DEFAULT_OUTAGE_EVENTS));
-                saveEventsToStorage(); currentEventIndex = 0;
-                populateEventSelectors(); renderEventUI(); renderCalendar(); renderAdminEventsList();
-                showToast("✨ รีเซ็ตเรียบร้อยแล้ว", "success");
-            }
-        }
-
-        function importJSONFromGemini() {
-            const rawText = document.getElementById('geminiImportInput').value.trim();
-            if (!rawText) { showToast("❌ กรุณาวางโค้ดก่อนทำการกดยืนยัน", "warning"); return; }
-            try {
-                const newEvent = JSON.parse(rawText);
-                const existingIdx = OUTAGE_EVENTS.findIndex(ev => ev.id === newEvent.id);
-                if (existingIdx !== -1) { OUTAGE_EVENTS[existingIdx] = newEvent; } else { OUTAGE_EVENTS.push(newEvent); }
-                saveEventsToStorage(); currentEventIndex = OUTAGE_EVENTS.length - 1;
-                populateEventSelectors(); renderEventUI(); renderCalendar();
-                document.getElementById('geminiImportInput').value = ''; closeAdminModal();
-                showToast("🎉 อัปเดตข้อมูลสำเร็จ!", "success");
-            } catch(e) { showToast("❌ ฟอร์แมต JSON ผิดพลาด", "error"); }
-        }
-
+        function resetToDefaultEvents() { OUTAGE_EVENTS = JSON.parse(JSON.stringify(DEFAULT_OUTAGE_EVENTS)); saveEventsToStorage(); initApp(); }
+        function importJSONFromGemini() { try { const ev = JSON.parse(document.getElementById('geminiImportInput').value); OUTAGE_EVENTS.push(ev); saveEventsToStorage(); initApp(); closeAdminModal(); } catch(e){} }
         function exportUpdatedHTMLFile() {
-            let docString = document.documentElement.outerHTML;
-            const startMarker = "/* START_OUTAGE_EVENTS */";
-            const endMarker = "/* END_OUTAGE_EVENTS */";
-            let startIndex = docString.indexOf(startMarker);
-            let endIndex = docString.indexOf(endMarker);
-            if (startIndex !== -1 && endIndex !== -1) {
-                let prefix = docString.substring(0, startIndex + startMarker.length);
-                let suffix = docString.substring(endIndex);
-                let cleanEvents = JSON.parse(JSON.stringify(OUTAGE_EVENTS));
-                let newMiddle = "\n        let OUTAGE_EVENTS = " + JSON.stringify(cleanEvents, null, 12) + ";\n        ";
-                let finalHTML = "<!DOCTYPE html>\n" + prefix + newMiddle + suffix;
-                let blob = new Blob([finalHTML], {type: "text/html;charset=utf-8"});
-                let link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = "index.html";
-                link.click();
-                showToast("📥 ดาวน์โหลดซอร์สโค้ดสำเร็จ!", "success");
+            let docString = document.documentElement.outerHTML; const start = "/* START_OUTAGE_EVENTS */"; const end = "/* END_OUTAGE_EVENTS */";
+            let sIdx = docString.indexOf(start); let eIdx = docString.indexOf(end);
+            if (sIdx !== -1 && eIdx !== -1) {
+                let finalHTML = "<!DOCTYPE html>\n" + docString.substring(0, sIdx + start.length) + "\n        let OUTAGE_EVENTS = " + JSON.stringify(OUTAGE_EVENTS, null, 12) + ";\n        " + docString.substring(eIdx);
+                let blob = new Blob([finalHTML], {type: "text/html;charset=utf-8"}); let link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "index.html"; link.click();
             }
         }
-
-        window.onload = function() { initApp(); toggleAccordion('acc-outage'); };
+        window.onload = function() { initApp(); };
     </script>
 </body></html>
