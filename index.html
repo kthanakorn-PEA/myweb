@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -1200,11 +1201,27 @@
                                         { "d": "M 400,60 L 400,420", "color": "#a855f7", "label": "แนวพิกัดไฟดับ ถนนสุขาภิบาล" },
                                         { "d": "M 400,220 L 200,220", "color": "#a855f7", "label": "แนวพิกัดไฟดับ ซอยหนองแสนตอ พรหมณี 1/5" }
                               ],
+                              "baseElements": [
+                                        { "type": "path", "d": "M 220,60 L 580,60", "stroke": "#3f3f46", "strokeWidth": "30", "opacity": "1" },
+                                        { "type": "path", "d": "M 220,60 L 580,60", "stroke": "#6b7280", "strokeWidth": "20", "opacity": "1" },
+                                        { "type": "path", "d": "M 220,220 L 580,220", "stroke": "#3f3f46", "strokeWidth": "30", "opacity": "1" },
+                                        { "type": "path", "d": "M 220,220 L 580,220", "stroke": "#6b7280", "strokeWidth": "20", "opacity": "1" },
+                                        { "type": "path", "d": "M 180,160 L 60,180", "stroke": "#3f3f46", "strokeWidth": "26", "opacity": "1" },
+                                        { "type": "path", "d": "M 180,160 L 60,180", "stroke": "#6b7280", "strokeWidth": "16", "opacity": "1" },
+                                        { "type": "path", "d": "M 580,160 L 700,140", "stroke": "#3f3f46", "strokeWidth": "26", "opacity": "1" },
+                                        { "type": "path", "d": "M 580,160 L 700,140", "stroke": "#6b7280", "strokeWidth": "16", "opacity": "1" },
+                                        { "type": "path", "d": "M 280,300 L 140,330", "stroke": "#3f3f46", "strokeWidth": "26", "opacity": "1" },
+                                        { "type": "path", "d": "M 280,300 L 140,330", "stroke": "#6b7280", "strokeWidth": "16", "opacity": "1" },
+                                        { "type": "path", "d": "M 560,300 L 700,310", "stroke": "#3f3f46", "strokeWidth": "26", "opacity": "1" },
+                                        { "type": "path", "d": "M 560,300 L 700,310", "stroke": "#6b7280", "strokeWidth": "16", "opacity": "1" }
+                              ],
                               "landmarks": [
                                         { "x": 400, "y": 60, "name": "ปากซอยโคกม่วง", "type": "purple" },
                                         { "x": 400, "y": 140, "name": "CJ More หนองแสนตอ", "type": "purple" },
-                                        { "x": 400, "y": 220, "name": "ปากซอยหนองแสนตอ 1/5", "type": "red" },
-                                        { "x": 220, "y": 220, "name": "พื้นที่ในซอยหนองแสนตอ 1/5", "type": "purple" }
+                                        { "x": 400, "y": 220, "name": "จุดเชื่อมต่อ (แยกซอยหนองแสนตอ 1/5)", "type": "red" },
+                                        { "x": 200, "y": 220, "name": "ซอยหนองแสนตอ พรหมณี 1/5", "type": "purple" },
+                                        { "x": 400, "y": 360, "name": "ร้านข้าวหอมหมูกระทะ", "type": "purple" },
+                                        { "x": 400, "y": 420, "name": "วัดสันตยาราม", "type": "purple" }
                               ]
                     }
           },
@@ -1235,15 +1252,23 @@
                     "mapConfig": {
                               "baseLayout": "clean-slate",
                               "highlightPaths": [
-                                        { "d": "M 650,280 L 450,210 L 260,210", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ถ.บายพาส (08.00-16.00 น.)" },
-                                        { "d": "M 450,210 L 460,340 M 430,210 L 410,340", "color": "#a855f7", "label": "แนวซอยและพื้นที่หมู่บ้านวิววันพาราไดซ์" }
+                                        { "d": "M 60,220 L 660,220", "color": "#a855f7", "label": "พิกัดปิดระบบไฟตลอดสาย ถ.บายพาส (08.00-16.00 น.)" },
+                                        { "d": "M 420,220 L 420,400", "color": "#a855f7", "label": "แนวซอยและพื้นที่หมู่บ้านวิววันพาราไดซ์" }
+                              ],
+                              "baseElements": [
+                                        { "type": "path", "d": "M 420,20 L 420,220", "stroke": "#3f3f46", "strokeWidth": "30", "opacity": "1" },
+                                        { "type": "path", "d": "M 420,20 L 420,220", "stroke": "#6b7280", "strokeWidth": "20", "opacity": "1" },
+                                        { "type": "path", "d": "M 0,60 L 200,220", "stroke": "#3f3f46", "strokeWidth": "30", "opacity": "1" },
+                                        { "type": "path", "d": "M 0,60 L 200,220", "stroke": "#6b7280", "strokeWidth": "20", "opacity": "1" },
+                                        { "type": "path", "d": "M 620,100 L 780,20", "stroke": "#3f3f46", "strokeWidth": "26", "opacity": "1" },
+                                        { "type": "path", "d": "M 620,100 L 780,20", "stroke": "#6b7280", "strokeWidth": "16", "opacity": "1" }
                               ],
                               "landmarks": [
-                                        { "x": 650, "y": 280, "name": "เดอะการ์เแดน คาเฟ่/รีสอร์ท", "type": "purple" },
-                                        { "x": 560, "y": 250, "name": "บ้านไม้หวานกาฟหอม", "type": "purple" },
-                                        { "x": 510, "y": 230, "name": "บ้านภูรินทร์ รีสอร์ท", "type": "purple" },
-                                        { "x": 440, "y": 290, "name": "ม.วิววันพาราไดซ์ / ที่ดินวัดใหญ่", "type": "purple" },
-                                        { "x": 260, "y": 210, "name": "สี่แยกหนองแสนตอ", "type": "red" }
+                                        { "x": 120, "y": 220, "name": "สี่แยกหนองแสนตอ", "type": "red" },
+                                        { "x": 290, "y": 220, "name": "ร้านค้าหน้าบ้านไม้หวานกาฬหอม", "type": "purple" },
+                                        { "x": 550, "y": 220, "name": "เดอะการ์เแดน รีสอร์ท และ คาเฟ่", "type": "purple" },
+                                        { "x": 460, "y": 220, "name": "บ้านภูรินทร์ รีสอร์ท", "type": "purple" },
+                                        { "x": 420, "y": 360, "name": "หมู่บ้านวิววันพาราไดซ์", "type": "purple" }
                               ]
                     }
           }
@@ -1254,7 +1279,7 @@
         let currentEventIndex = 0;
         let currentCalMonth = 5;
         let currentCalYear = 2026;
-        const STORAGE_VERSION = "v10-norm";
+        const STORAGE_VERSION = "v11-fixed";
 
         // ──────────────────────────────────────────
         //  Storage
@@ -1492,21 +1517,19 @@
 
             // Highlight Paths (outage zones)
             if (mapConfig && mapConfig.highlightPaths) {
-                // Auto-generate clean-slate roads based on highlightPaths (only for clean-slate)
-                if (!mapConfig.baseLayout || mapConfig.baseLayout === "clean-slate") {
-                    mapConfig.highlightPaths.forEach(path => {
-                        svg += `<path d="${path.d}" fill="none" stroke="#292524" stroke-width="26" stroke-linecap="round"/>`;
-                        svg += `<path d="${path.d}" fill="none" stroke="#374151" stroke-width="18" stroke-linecap="round"/>`;
-                    });
-                }
+                // Auto-generate visible grey roads under each highlight path
+                mapConfig.highlightPaths.forEach(path => {
+                    // Outer road border (visible dark grey)
+                    svg += `<path d="${path.d}" fill="none" stroke="#3f3f46" stroke-width="30" stroke-linecap="round"/>`;
+                    // Inner road surface (medium grey — clearly visible on dark bg)
+                    svg += `<path d="${path.d}" fill="none" stroke="#6b7280" stroke-width="20" stroke-linecap="round"/>`;
+                });
 
                 mapConfig.highlightPaths.forEach(path => {
-                    // Glow shadow
-                    svg += `<path d="${path.d}" fill="none" stroke-width="20" stroke-linecap="round" opacity="0.12" style="stroke: ${path.color} !important;"/>`;
-                    // Main colored path
-                    svg += `<path d="${path.d}" fill="none" stroke-width="10" stroke-linecap="round" opacity="0.9" style="stroke: ${path.color} !important;"/>`;
+                    // Subtle color glow
+                    svg += `<path d="${path.d}" fill="none" stroke="${path.color}" stroke-width="10" stroke-linecap="round" opacity="0.3"/>`;
                     // Animated white dashes on top
-                    svg += `<path d="${path.d}" class="animated-path" fill="none" stroke-width="3" stroke-linecap="round"/>`;
+                    svg += `<path d="${path.d}" fill="none" stroke="#ffffff" stroke-width="3" class="animated-path"/>`;
                 });
             }
 
